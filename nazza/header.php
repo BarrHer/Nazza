@@ -21,10 +21,10 @@
         <a class="nav-link text-red" href="RechercheViewer.php">Recherche</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link text-red" href="#">Trajet</a>
+        <a class="nav-link text-red" href="TrajetViewer.php">Trajet</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link text-red" href="#">Compte</a>
+        <a class="nav-link text-red" href="CompteViewer.php">Compte</a>
         </li>
     </ul>
     </nav>

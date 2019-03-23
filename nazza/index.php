@@ -1,6 +1,6 @@
 <?php include ("header.php"); ?>
 
-<div class="container mt-5">
+<div class="container mt-5" style="width:1140;padding-right: 0px;padding-left: 0px;">
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4 border-0 rounded shadow-lg">
@@ -48,6 +48,12 @@
                                     <td>Dooley</td>
                                     <td>july@example.com</td>
                                 </tr>
+                                <tr>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
