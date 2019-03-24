@@ -53,7 +53,6 @@
                                     <td>Doe</td>
                                     <td>john@example.com</td>
                                 </tr>
-
                                 </tbody>
                             </table>
                         </div>
