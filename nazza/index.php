@@ -1,6 +1,12 @@
-<?php include ("header.php"); ?>
+<?php include ("header.php");
+require_once ("modele/modele.php");
+require_once ("controlleur/AdherantControlleur.php")
+?>
 
-<div class="container mt-5">
+<div class="container mt-5" style="width:1140;padding-right: 0px;padding-left: 0px;">
+<?php echo $data['test'];
+var_dump($data['test']);
+?>
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4 border-0 rounded shadow-lg">
@@ -47,6 +53,11 @@
                                     <td>July</td>
                                     <td>Dooley</td>
                                     <td>july@example.com</td>
+                                </tr>
+                                <tr>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
                                 </tr>
                                 </tbody>
                             </table>
