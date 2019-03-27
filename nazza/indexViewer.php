@@ -1,8 +1,7 @@
 <?php include ("header.php"); ?>
 
 <div class="container mt-5" style="width:1140;padding-right: 0px;padding-left: 0px;">
-<?php var_dump($adh[0]);
-?>
+
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4 border-0 rounded shadow-lg">
@@ -20,51 +19,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php for ($i=0; $i<$adh[$i].length;$i++){
+                                <?php foreach ($adh as $key => $value) {
                                     echo "<tr> 
-                                    <td> $value['nom'] </td> 
-                                    <td> $value['prenom'] </td> 
-                                    <td> $value['pseudo'] </td> 
+                                    <td>".$adh[$key]['prenom']."</td>
+                                    <td>".$adh[$key]['nom']."</td>
+                                    <td>".$adh[$key]['pseudo']."</td>
                                     </tr>";
-                                    $i++;
                                 }
-                                
+                                // Remplacer pseudo par mail
                                 ?>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>

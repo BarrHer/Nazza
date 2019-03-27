@@ -14,4 +14,11 @@ class adherant extends ConnexionDB  {
 		$sql->execute( array($id) );
 		return $sql->fetch();
 	}
+
+	public function inscription($empl){
+		$sql = $this->cnx->prepare("INSERT INTO adherant (nom,prenom,pseudo,mdp,email)
+        	VALUES (?,?,?,?,?)");
+		$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$empl['mdp'],$empl['email']));
+		return $sql->rowCount();
+	}
 }

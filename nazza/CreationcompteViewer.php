@@ -1,53 +1,38 @@
 <?php include ("header.php"); ?>
 
 <div class="container mt-5 py-4 rounded shadow-lg">
-    <form action="">
+    <form action="?ctrl=Adherant&mth=inscription" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                <label for="nom">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
-                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                <label for="prenom">Prenom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom">
             </div>
         </div>
         <div class="form-group">
-            <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            <label for="pseudo">Pseudo</label>
+            <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
         </div>
         <div class="form-group">
-            <label for="inputAddress2">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity">
+                <label for="mdp">Mot de passe</label>
+                <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Mot de passe">
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
+            <div class="form-group col-md-6">
+                <label for="cmdp">Confirmation mot de passe</label>
+                <input type="password" class="form-control" id="cmdp" name="cmdp" placeholder="Mot de passe">
             </div>
-            <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
             </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                    Check me out
-                </label>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+        <button type="submit" name="btnInscription" class="btn btn-primary">S'inscrire</button>
     </form>
-
+<!-- Ajouter un modal de confirmation d'inscription -->
 </div>
 
 <?php include ("footer.php"); ?>
