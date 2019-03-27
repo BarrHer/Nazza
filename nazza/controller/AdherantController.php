@@ -10,8 +10,5 @@ class AdherantController {
         $this->adherants = new adherant();
     }
 
-    public function show() {
-    	$adherant = "oui";
-    }
 
 }

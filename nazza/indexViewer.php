@@ -1,9 +1,7 @@
 <?php include ("header.php"); ?>
 
 <div class="container mt-5" style="width:1140;padding-right: 0px;padding-left: 0px;">
-<?php echo $data['test'];
-var_dump($data['test']);
-?>
+
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4 border-0 rounded shadow-lg">
@@ -21,41 +19,15 @@ var_dump($data['test']);
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
+                                <?php foreach ($adh as $key => $value) {
+                                    echo "<tr> 
+                                    <td>".$adh[$key]['prenom']."</td>
+                                    <td>".$adh[$key]['nom']."</td>
+                                    <td>".$adh[$key]['pseudo']."</td>
+                                    </tr>";
+                                }
+                                // Remplacer pseudo par mail
+                                ?>
                                 </tbody>
                             </table>
                         </div>
