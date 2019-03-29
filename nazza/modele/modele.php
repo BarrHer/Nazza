@@ -21,4 +21,11 @@ class adherant extends ConnexionDB  {
 		$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$empl['mdp'],$empl['email']));
 		return $sql->rowCount();
 	}
+
+	public function login($pseudo, $mdp)
+	{
+		$sql = $this->cnx->prepare("SELECT id_adh,mdp,status FROM adherant WHERE pseudo=? AND mdp=?");
+		$sql->execute( array($pseudo, $mdp) );
+		return $sql->fetch();
+	}
 }
