@@ -3,7 +3,7 @@
 <div class="container mt-5 py-4 rounded shadow-lg">
   <form action="?ctrl=Adherant&mth=connexion" method="post">
     <div class="form-group">
-      <label for="login">Pseudo</label>
+      <label for="pseudologin">Pseudo</label>
       <input type="text" class="form-control" name="pseudologin" id="login" placeholder="Pseudo">
     </div>
     <div class="form-group">
