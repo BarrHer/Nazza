@@ -30,7 +30,7 @@
                 <input type="password" class="form-control" id="cmdp" name="cmdp" placeholder="Mot de passe">
             </div>
             </div>
-        <button type="submit" name="btnModification" class="btn btn-primary">S'inscrire</button>
+        <button type="submit" name="btnModification" class="btn btn-primary">Modifier</button>
     </form>
 <!-- Ajouter un modal de confirmation de modification -->
 </div>

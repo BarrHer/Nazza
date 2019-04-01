@@ -84,11 +84,12 @@ class AdherantController {
     }
 
     public function modification(){
-        session_start();
+        
         $errors = array();
 
         if (isset($_POST['btnModification'])) {
-
+            session_start();
+            session_write_close();
             /*if (empty($_POST['prenom'])) {
                 $errors['prenom'] = 'Le prénom doit être rempli';
             }
