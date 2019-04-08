@@ -8,32 +8,32 @@
   <table class="table table-bordered table-responsive-sm">
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th>Debut</th>
+        <th>Fin</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Places</th>
       </tr>
     </thead>
     <tbody id="myTable">
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@mail.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@greatstuff.com</td>
-      </tr>
-      <tr>
-        <td>Anja</td>
-        <td>Ravendale</td>
-        <td>a_r@test.com</td>
-      </tr>
+      <?php
+      
+        foreach ($traj as $key => $value) {
+          list($date, $heure) = explode(" ", $traj[$key]['date']);
+          list($yyyy, $mm, $dd) = explode("-", $date);
+       echo "<tr> 
+       
+        <td>".$value['debut']['nom_ville']."</td>
+        <td>".$value['fin']['nom_ville']."</td>
+        <td>".$dd."/".$mm."/".$yyyy."</td>
+        <td>".$heure."</td>
+        <td>".$value['nb_places']."</td>
+        </tr>";
+       }
+
+
+        // Remplacer pseudo par mail
+     ?>
     </tbody>
   </table>
   

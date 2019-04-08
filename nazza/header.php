@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,17 +16,22 @@
 <div class="shadow-lg">
     <nav class="bg-naz border-bottom">
     <ul class="nav justify-content-end">
+    <?php if (isset($_SESSION) && !empty($_SESSION)) { ?>
         <li class="nav-item">
-        <a class="nav-link text-red" href="?ctrl=Accueil&mth=index">Accueil</a>
+            <a class="nav-link text-red" href="?ctrl=Adherant&mth=deconnexion"><?php echo $_SESSION['pseudo'] ?></a>
+        </li>
+    <?php } ?>        
+        <li class="nav-item">
+            <a class="nav-link text-red" href="?ctrl=Accueil&mth=index">Accueil</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link text-red" href="?ctrl=Accueil&mth=recherche">Recherche</a>
+            <a class="nav-link text-red" href="?ctrl=Accueil&mth=recherche">Recherche</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link text-red" href="?ctrl=Accueil&mth=trajet">Trajet</a>
+            <a class="nav-link text-red" href="?ctrl=Accueil&mth=trajet">Trajet</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link text-red" href="?ctrl=Accueil&mth=compte">Compte</a>
+            <a class="nav-link text-red" href="?ctrl=Accueil&mth=compte">Compte</a>
         </li>
     </ul>
     </nav>

@@ -1,7 +1,7 @@
 <?php include ("header.php"); ?>
 
 <div class="container mt-5 py-4 rounded shadow-lg">
-    <form action="?ctrl=Adherant&mth=inscription" method="post">
+    <form action="?ctrl=Adherant&mth=modification" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="nom">Nom</label>
@@ -30,9 +30,9 @@
                 <input type="password" class="form-control" id="cmdp" name="cmdp" placeholder="Mot de passe">
             </div>
             </div>
-        <button type="submit" name="btnInscription" class="btn btn-primary">S'inscrire</button>
+        <button type="submit" name="btnModification" class="btn btn-primary">Modifier</button>
     </form>
-<!-- Ajouter un modal de confirmation d'inscription -->
+<!-- Ajouter un modal de confirmation de modification -->
 </div>
 
 <?php include ("footer.php"); ?>

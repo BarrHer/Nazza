@@ -8,23 +8,30 @@
                 <div class="card-body">
                     <div class="tab-content mt-2">
                         <div class="tab-pane fade show active text-center" id="tabone" role="tabpanel">
-                            <h2>Basic Table</h2>
-                            <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>            
+                        <h2>Derniers Trajets</h2>
+                            <p>Trajets :</p>            
                             <table class="table table-responsive-sm">
                                 <thead>
                                 <tr>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Email</th>
+                                    <th>Debut</th>
+                                    <th>Fin</th>
+                                    <th>Date</th>
+                                    <th>Heure</th>
+                                    <th>Places</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($adh as $key => $value) {
+                                <?php  foreach ($traj as $key => $value) {
+                                    list($date, $heure) = explode(" ", $traj[$key]['date']);
+                                    list($yyyy, $mm, $dd) = explode("-", $date);
                                     echo "<tr> 
-                                    <td>".$adh[$key]['prenom']."</td>
-                                    <td>".$adh[$key]['nom']."</td>
-                                    <td>".$adh[$key]['pseudo']."</td>
-                                    </tr>";
+                                 
+                                  <td>".$value['debut']['nom_ville']."</td>
+                                  <td>".$value['fin']['nom_ville']."</td>
+                                  <td>".$dd."/".$mm."/".$yyyy."</td>
+                                  <td>".$heure."</td>
+                                  <td>".$value['nb_places']."</td>
+                                  </tr>";
                                 }
                                 // Remplacer pseudo par mail
                                 ?>
@@ -40,8 +47,8 @@
                 <div class="card-body">
                     <div class="tab-content mt-2">
                         <div class="tab-pane fade show active text-center" id="tabBackgroundOne" role="tabpanel">
-                            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>
-                            <button type="button" class="btn btn-outline-danger pt-2">Danger</button>
+                            <p>Site de covoiturage blablabla </p>
+                            <button type="button" OnClick="window.location='?ctrl=Accueil&mth=trajet'" class="btn btn-outline-danger pt-2">Ajouter un trajet</button>
                         </div>
                     </div>
                 </div>
