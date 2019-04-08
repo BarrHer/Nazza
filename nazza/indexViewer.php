@@ -1,5 +1,5 @@
 <?php include ("header.php"); ?>
-<?php var_dump($_SESSION);?>
+
 <div class="container mt-5" style="width:1140;padding-right: 0px;padding-left: 0px;">
 
     <div class="row">
@@ -40,8 +40,8 @@
                 <div class="card-body">
                     <div class="tab-content mt-2">
                         <div class="tab-pane fade show active text-center" id="tabBackgroundOne" role="tabpanel">
-                            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>
-                            <button type="button" class="btn btn-outline-danger pt-2">Danger</button>
+                            <p>Site de covoiturage blablabla </p>
+                            <button type="button" OnClick="window.location='?ctrl=Accueil&mth=trajet'" class="btn btn-outline-danger pt-2">Ajouter un trajet</button>
                         </div>
                     </div>
                 </div>
