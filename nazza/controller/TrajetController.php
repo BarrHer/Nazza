@@ -1,6 +1,6 @@
 <?php
 
-require_once ("modele/trajet.php");
+require_once ("modele/modeleTrajet.php");
 
 class TrajetController {
 
@@ -12,9 +12,7 @@ class TrajetController {
 
     public function add() {
         $errors = array();
-
         if (isset($_POST['submit'])) {
-
             if (empty($_POST['inputAddress'])) {
                 $errors['inputAddress'] = 'a';
             }
@@ -49,5 +47,4 @@ class TrajetController {
         //$data['categorie'] = $this->employes->categorie();
         include "TrajetViewer.php";
     }
-
 }
