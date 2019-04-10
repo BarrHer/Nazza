@@ -22,7 +22,7 @@
                                 </thead>
                                 <tbody>
                                 <?php  foreach ($traj as $key => $value) {
-                                    list($date, $heure) = explode(" ", $traj[$key]['date']);
+                                    list($date, $heure) = explode(" ", $traj[$key]['dateTrajet']);
                                     list($yyyy, $mm, $dd) = explode("-", $date);
                                     echo "<tr> 
                                  

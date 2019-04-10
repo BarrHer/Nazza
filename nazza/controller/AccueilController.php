@@ -28,7 +28,7 @@ class AccueilController
 			
 			$traj[$key]['debut']=$this->villes->getVille($traj2[$key]['debut']);
 			$traj[$key]['fin']=$this->villes->getVille($traj2[$key]['fin']);
-			$traj[$key]['date']=$traj2[$key]['date'];
+			$traj[$key]['dateTrajet']=$traj2[$key]['dateTrajet'];
 			$traj[$key]['nb_places']=$traj2[$key]['nb_places'];
 			 
 			}
@@ -44,7 +44,7 @@ class AccueilController
 			
 			$traj[$key]['debut']=$this->villes->getVille($traj2[$key]['debut']);
 			$traj[$key]['fin']=$this->villes->getVille($traj2[$key]['fin']);
-			$traj[$key]['date']=$traj2[$key]['date'];
+			$traj[$key]['dateTrajet']=$traj2[$key]['dateTrajet'];
 			$traj[$key]['nb_places']=$traj2[$key]['nb_places'];
 			 
 			}
