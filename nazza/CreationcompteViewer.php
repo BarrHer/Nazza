@@ -48,7 +48,7 @@ function subm() {
             <input type="hidden" name="token" value="" id="captcha">
             <input type="hidden" name="btnInscription" value="1">
         <button type="button" name="a" class="btn btn-primary" onclick="subm()">S'inscrire</button>
-    </form><?php if (isset($msg)) { echo "captcha score : ".$msg;} ?>
+    </form><?php if (isset($msg)) { echo $msg;} ?>
 <!-- Ajouter un modal de confirmation d'inscription -->
 </div>
 
