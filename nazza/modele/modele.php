@@ -33,6 +33,8 @@ class adherant extends ConnexionDB  {
 
 	public function update($empl,$id)
 	{
+		$mdp = $empl['mdp'];
+		$mdphash = password_hash($mdp, PASSWORD_DEFAULT);
 		// le if permet a l'utilisateur de modifier ses informations sans modifier son mdp
 		if (empty($empl['mdp'])){
 			$sql = $this->cnx->prepare("UPDATE adherant SET nom=?, prenom=?, pseudo=?,email=? WHERE id_adh=?");
@@ -40,7 +42,7 @@ class adherant extends ConnexionDB  {
 		}
 		else {
 			$sql = $this->cnx->prepare("UPDATE adherant SET nom=?, prenom=?, pseudo=?,mdp=?,email=? WHERE id_adh=?");
-			$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$empl['mdp'],$empl['email'],$id));
+			$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$mdphash ,$empl['email'],$id));
 		}
 		
 		return $sql->rowCount();

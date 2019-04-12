@@ -42,9 +42,7 @@ class TrajetController {
                 //$this->index($msg); // Redirection vers l'index
             } else { echo $errors; }
         }
-        echo $_POST['NbPlace'];
-        echo "b";
-        //$data['categorie'] = $this->employes->categorie();
+        
         include "TrajetViewer.php";
     }
 }

@@ -1,106 +1,269 @@
-#------------------------------------------------------------
-#        Script MySQL.
-#------------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 4.8.2
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost:3306
+-- Généré le :  ven. 12 avr. 2019 à 05:51
+-- Version du serveur :  5.7.23
+-- Version de PHP :  7.1.21
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-#------------------------------------------------------------
-# Table: Adhérant
-#------------------------------------------------------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE Adherant(
-        id_adh Int  Auto_increment  NOT NULL ,
-        nom    Varchar (50) NOT NULL ,
-        prenom Varchar (50) NOT NULL ,
-        pseudo Varchar (50) NOT NULL ,
-        mdp    Varchar (50) NOT NULL ,
-        status Bool NOT NULL
-	,CONSTRAINT Adherant_PK PRIMARY KEY (id_adh)
-)ENGINE=InnoDB;
+--
+-- Base de données :  `nazza`
+--
 
+-- --------------------------------------------------------
 
-#------------------------------------------------------------
-# Table: Ville
-#------------------------------------------------------------
+--
+-- Structure de la table `adherant`
+--
 
-CREATE TABLE Ville(
-        id_ville  Int NOT NULL ,
-        nom_ville Varchar (50) NOT NULL ,
-        longitude Float NOT NULL ,
-        latitude  Float NOT NULL
-	,CONSTRAINT Ville_PK PRIMARY KEY (id_ville)
-)ENGINE=InnoDB;
+CREATE TABLE `adherant` (
+  `id_adh` int(11) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `pseudo` varchar(50) NOT NULL,
+  `mdp` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `email` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `adherant`
+--
 
-#------------------------------------------------------------
-# Table: Trajet
-#------------------------------------------------------------
+INSERT INTO `adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `mdp`, `status`, `email`) VALUES
+(2, 'modif', 'modif', 'modif', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'modif@modif.modif'),
+(3, 'test', 'test', 'test', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test');
 
-CREATE TABLE Trajet(
-        id_trajet Int NOT NULL ,
-        debut     Int NOT NULL ,
-        fin       Int NOT NULL ,
-        nb_places Int NOT NULL ,
-        date      Datetime NOT NULL ,
-        
-	CONSTRAINT Trajet_PK PRIMARY KEY (id_trajet)
+-- --------------------------------------------------------
 
-	
-    ,CONSTRAINT deb_vil_FK FOREIGN KEY (debut) REFERENCES Ville(id_ville)
-    ,CONSTRAINT fin_vil_FK FOREIGN KEY (fin) REFERENCES Ville(id_ville)
-)ENGINE=InnoDB;
+--
+-- Structure de la table `eleve`
+--
 
+CREATE TABLE `eleve` (
+  `id` int(11) NOT NULL,
+  `Filiaire` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#------------------------------------------------------------
-# Table: Personnel
-#------------------------------------------------------------
+-- --------------------------------------------------------
 
-CREATE TABLE Personnel(
-        id Int NOT NULL ,
-        Fonction Varchar (20) NOT NULL ,
+--
+-- Structure de la table `est_passage`
+--
 
-        CONSTRAINT Perso_adh_FK FOREIGN KEY (id) REFERENCES Adherant(id_adh)
+CREATE TABLE `est_passage` (
+  `id_trajet_est_passage` int(11) NOT NULL,
+  `id_adh_Adherant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-)ENGINE=InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Structure de la table `personnel`
+--
 
-#------------------------------------------------------------
-# Table: Eleve
-#------------------------------------------------------------
+CREATE TABLE `personnel` (
+  `id` int(11) NOT NULL,
+  `Fonction` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE Eleve(
-        id Int NOT NULL ,
-        Filiaire Varchar (20) NOT NULL ,
+-- --------------------------------------------------------
 
-        CONSTRAINT Eleve_adh_FK FOREIGN KEY (id) REFERENCES Adherant(id_adh)
-)ENGINE=InnoDB;
+--
+-- Structure de la table `propose`
+--
 
+CREATE TABLE `propose` (
+  `id_trajet_Propose` int(11) NOT NULL,
+  `id_adh_Adherant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#------------------------------------------------------------
-# Table: Propose
-#------------------------------------------------------------
+-- --------------------------------------------------------
 
-CREATE TABLE Propose(
-        id_trajet_Propose Int NOT NULL ,
-        id_adh_Adherant   Int NOT NULL 
-	,CONSTRAINT Propose_PK PRIMARY KEY (id_trajet_Propose,id_adh_Adherant)
+--
+-- Structure de la table `trajet`
+--
 
-	,CONSTRAINT Propose_Trajet_FK FOREIGN KEY (id_trajet_Propose) REFERENCES Trajet(id_trajet)
-	,CONSTRAINT Propose_Adherant0_FK FOREIGN KEY (id_adh_Adherant) REFERENCES Adherant(id_adh)
-    
-)ENGINE=InnoDB;
+CREATE TABLE `trajet` (
+  `id_trajet` int(11) NOT NULL,
+  `debut` int(11) NOT NULL,
+  `fin` int(11) NOT NULL,
+  `nb_places` int(11) NOT NULL,
+  `dateTrajet` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `trajet`
+--
 
-#------------------------------------------------------------
-# Table: est passagé
-#------------------------------------------------------------
+INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
+(2, 1, 2, 2, '2019-03-27 10:22:59'),
+(3, 1, 2, 3, '2019-06-20 02:30:00'),
+(4, 1, 2, 3, '1980-08-26 02:30:37'),
+(5, 3, 1, 3, '2019-04-12 12:44:19');
 
-CREATE TABLE est_passage(
-        id_trajet_est_passage Int NOT NULL ,
-        id_adh_Adherant       Int NOT NULL 
-	,CONSTRAINT est_passage_PK PRIMARY KEY (id_trajet_est_passage,id_adh_Adherant)
+-- --------------------------------------------------------
 
-	,CONSTRAINT est_passage_Trajet_FK FOREIGN KEY (id_trajet_est_passage) REFERENCES Trajet(id_trajet)
-	,CONSTRAINT est_passage_Adherant0_FK FOREIGN KEY (id_adh_Adherant) REFERENCES Adherant(id_adh)
-    
-)ENGINE=InnoDB;
+--
+-- Structure de la table `ville`
+--
 
+CREATE TABLE `ville` (
+  `id_ville` int(11) NOT NULL,
+  `nom_ville` varchar(50) NOT NULL,
+  `longitude` float NOT NULL,
+  `latitude` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `ville`
+--
+
+INSERT INTO `ville` (`id_ville`, `nom_ville`, `longitude`, `latitude`) VALUES
+(1, 'Saint-joseph', 3, 8),
+(2, 'Saint-Pierre', 1, 2),
+(3, 'Saint-Denis', 121, 1),
+(4, 'Saint-André', 1, 1),
+(5, 'Le Port', 1, 1),
+(6, 'Saint-Louis', 2, 2),
+(7, 'Saint-Leu', 3, 3),
+(8, 'Le Tampon', 33, 3),
+(9, 'La Possession', 4, 4),
+(10, 'Sainte-Marie', 2, 2),
+(11, 'Sainte-Suzanne', 2, 2),
+(12, 'L\'Etang-Salé', 3, 3),
+(13, 'Saint-Paul', 2, 2),
+(14, 'Cilaos', 2, 2),
+(15, 'Entre-Deux', 2, 2),
+(16, 'Salazie', 22, 22),
+(17, 'Les Avirons', 2, 2),
+(18, 'Saint-Philippe', 2, 2),
+(19, 'Petit-Ile', 2, 2),
+(20, 'Bras-Panon', 2, 2),
+(21, 'Sainte-Rose', 2, 2),
+(22, 'Trois Bassins', 2, 2),
+(23, 'La Plaine Des Palmistes', 2, 2),
+(24, 'Saint-Benoît', 2, 2),
+(25, 'Saint-Gilles les Bains', 2, 2),
+(26, 'Sainte-Clotilde', 1, 2),
+(29, 'Sainte-Anne', 1, 2);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `adherant`
+--
+ALTER TABLE `adherant`
+  ADD PRIMARY KEY (`id_adh`);
+
+--
+-- Index pour la table `eleve`
+--
+ALTER TABLE `eleve`
+  ADD KEY `Eleve_adh_FK` (`id`);
+
+--
+-- Index pour la table `est_passage`
+--
+ALTER TABLE `est_passage`
+  ADD KEY `est_passage_Trajet_FK` (`id_trajet_est_passage`),
+  ADD KEY `est_passage_Adherant0_FK` (`id_adh_Adherant`);
+
+--
+-- Index pour la table `personnel`
+--
+ALTER TABLE `personnel`
+  ADD KEY `Perso_adh_FK` (`id`);
+
+--
+-- Index pour la table `propose`
+--
+ALTER TABLE `propose`
+  ADD KEY `Propose_Trajet_FK` (`id_trajet_Propose`),
+  ADD KEY `Propose_Adherant0_FK` (`id_adh_Adherant`);
+
+--
+-- Index pour la table `trajet`
+--
+ALTER TABLE `trajet`
+  ADD PRIMARY KEY (`id_trajet`),
+  ADD KEY `deb_vil_FK` (`debut`),
+  ADD KEY `fin_vil_FK` (`fin`);
+
+--
+-- Index pour la table `ville`
+--
+ALTER TABLE `ville`
+  ADD PRIMARY KEY (`id_ville`) USING BTREE;
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `adherant`
+--
+ALTER TABLE `adherant`
+  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `trajet`
+--
+ALTER TABLE `trajet`
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `eleve`
+--
+ALTER TABLE `eleve`
+  ADD CONSTRAINT `Eleve_adh_FK` FOREIGN KEY (`id`) REFERENCES `adherant` (`id_adh`);
+
+--
+-- Contraintes pour la table `est_passage`
+--
+ALTER TABLE `est_passage`
+  ADD CONSTRAINT `est_passage_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `adherant` (`id_adh`),
+  ADD CONSTRAINT `est_passage_Trajet_FK` FOREIGN KEY (`id_trajet_est_passage`) REFERENCES `trajet` (`id_trajet`);
+
+--
+-- Contraintes pour la table `personnel`
+--
+ALTER TABLE `personnel`
+  ADD CONSTRAINT `Perso_adh_FK` FOREIGN KEY (`id`) REFERENCES `adherant` (`id_adh`);
+
+--
+-- Contraintes pour la table `propose`
+--
+ALTER TABLE `propose`
+  ADD CONSTRAINT `Propose_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `adherant` (`id_adh`),
+  ADD CONSTRAINT `Propose_Trajet_FK` FOREIGN KEY (`id_trajet_Propose`) REFERENCES `trajet` (`id_trajet`);
+
+--
+-- Contraintes pour la table `trajet`
+--
+ALTER TABLE `trajet`
+  ADD CONSTRAINT `deb_vil_FK` FOREIGN KEY (`debut`) REFERENCES `ville` (`id_ville`),
+  ADD CONSTRAINT `fin_vil_FK` FOREIGN KEY (`fin`) REFERENCES `ville` (`id_ville`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

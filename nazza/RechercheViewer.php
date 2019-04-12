@@ -13,6 +13,7 @@
         <th>Date</th>
         <th>Heure</th>
         <th>Places</th>
+        <th></th>
       </tr>
     </thead>
     <tbody id="myTable">
@@ -28,16 +29,14 @@
         <td>".$dd."/".$mm."/".$yyyy."</td>
         <td>".$heure."</td>
         <td>".$value['nb_places']."</td>
+        <td class='text-center'><button type='button' class='btn btn-outline-danger'>Rejoindre</button></td>
         </tr>";
        }
 
-
-        // Remplacer pseudo par mail
      ?>
     </tbody>
   </table>
-  
-  <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+
 </div>
 
 <script>

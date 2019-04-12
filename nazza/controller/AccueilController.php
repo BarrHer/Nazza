@@ -53,6 +53,7 @@ class AccueilController
     
     public function trajet()
 	{
+		$villes = $this->villes->getAllVille();
 		include "TrajetViewer.php";
   	}
     

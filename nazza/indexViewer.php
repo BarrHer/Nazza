@@ -18,6 +18,7 @@
                                     <th>Date</th>
                                     <th>Heure</th>
                                     <th>Places</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -31,6 +32,7 @@
                                   <td>".$dd."/".$mm."/".$yyyy."</td>
                                   <td>".$heure."</td>
                                   <td>".$value['nb_places']."</td>
+                                  <td><button type='button' class='btn btn-outline-danger'>Rejoindre</button></td>
                                   </tr>";
                                 }
                                 // Remplacer pseudo par mail
