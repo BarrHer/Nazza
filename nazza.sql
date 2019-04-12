@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le :  lun. 08 avr. 2019 à 00:09
+-- Généré le :  ven. 12 avr. 2019 à 05:26
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.1.21
 
@@ -34,8 +34,19 @@ CREATE TABLE `adherant` (
   `prenom` varchar(50) NOT NULL,
   `pseudo` varchar(50) NOT NULL,
   `mdp` varchar(50) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `email` varchar(200) NOT NULL,
+  `verif` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `adherant`
+--
+
+INSERT INTO `adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `mdp`, `status`, `email`, `verif`) VALUES
+(1, 'test', 'test', 'test', 'test', 0, 'test@test.test', 0),
+(2, 'modif', 'modif', 'modif', 'modif', 0, 'modif@modif.modif', 0),
+(21, 'aa', 'aa', 'aa', 'aa', 0, 'aa@a.a', 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +111,22 @@ CREATE TABLE `trajet` (
 --
 
 INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
-(2, 1, 2, 2, '2019-03-27 10:22:59');
+(2, 1, 2, 2, '2019-03-27 10:22:59'),
+(3, 1, 2, 3, '2019-06-20 02:30:00'),
+(4, 1, 2, 5, '2019-09-25 21:00:00'),
+(5, 1, 2, 2, '2017-08-26 15:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `verification`
+--
+
+CREATE TABLE `verification` (
+  `adh` int(11) NOT NULL,
+  `code` varchar(64) NOT NULL,
+  `dateVerif` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -168,6 +194,12 @@ ALTER TABLE `trajet`
   ADD KEY `fin_vil_FK` (`fin`);
 
 --
+-- Index pour la table `verification`
+--
+ALTER TABLE `verification`
+  ADD KEY `Verif_adh_FK` (`adh`);
+
+--
 -- Index pour la table `ville`
 --
 ALTER TABLE `ville`
@@ -181,13 +213,13 @@ ALTER TABLE `ville`
 -- AUTO_INCREMENT pour la table `adherant`
 --
 ALTER TABLE `adherant`
-  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Contraintes pour les tables déchargées
@@ -225,6 +257,12 @@ ALTER TABLE `propose`
 ALTER TABLE `trajet`
   ADD CONSTRAINT `deb_vil_FK` FOREIGN KEY (`debut`) REFERENCES `ville` (`id_ville`),
   ADD CONSTRAINT `fin_vil_FK` FOREIGN KEY (`fin`) REFERENCES `ville` (`id_ville`);
+
+--
+-- Contraintes pour la table `verification`
+--
+ALTER TABLE `verification`
+  ADD CONSTRAINT `Verif_adh_FK` FOREIGN KEY (`adh`) REFERENCES `adherant` (`id_adh`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
