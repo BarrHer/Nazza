@@ -5,19 +5,19 @@
     <form action="?ctrl=trajet&mth=add" method="post">
         <div class="form-group">
             <label for="inputAddress">Départ</label>
-            <select id="inputAddress" name="inputAddress" class="form-control">
+            <select id="inputAddress" name="inputAddress" class="form-control" onchange="verif(1);">
             <option value="0">--</option>
             <?php foreach ($villes as $key => $value) {
-                echo '<option onclick="verif(1);" value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';
+                echo '<option value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';
             } ?>  
             </select> 
         </div>
         <div class="form-group">
             <label for="inputAddress2">Arrivé</label>
-            <select id="inputAddress2" name="inputAddress2" class="form-control">
+            <select id="inputAddress2" name="inputAddress2" class="form-control" onchange="verif(2);">
                 <option value="0">--</option>
                 <?php foreach ($villes as $key => $value) {
-                echo '<option onclick="verif(2);" value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';
+                echo '<option value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';
             } ?>  
             </select> 
         </div>

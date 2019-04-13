@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le :  ven. 12 avr. 2019 à 05:51
--- Version du serveur :  5.7.23
--- Version de PHP :  7.1.21
+-- Hôte : 127.0.0.1
+-- Généré le :  sam. 13 avr. 2019 à 12:13
+-- Version du serveur :  10.1.38-MariaDB
+-- Version de PHP :  7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -35,16 +35,22 @@ CREATE TABLE `adherant` (
   `pseudo` varchar(50) NOT NULL,
   `mdp` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  `email` varchar(200) NOT NULL
+  `email` varchar(200) NOT NULL,
+  `verif` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `adherant`
 --
 
-INSERT INTO `adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `mdp`, `status`, `email`) VALUES
-(2, 'modif', 'modif', 'modif', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'modif@modif.modif'),
-(3, 'test', 'test', 'test', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test');
+INSERT INTO `adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `mdp`, `status`, `email`, `verif`) VALUES
+(1, 'test1', 'test1', 'test1', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test', 0),
+(2, 'modif', 'modif', 'modif', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'modif@modif.modif', 1),
+(3, 'test', 'test', 'test', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test', 1),
+(5, 'fusion', 'fusion', 'fusion', '$2y$10$JZMzZewLUe2yY0d8YCVdWOiTNKPC4m/03DIlcGSW82XBlGANihKLi', 0, 'herve974.30@gmail.com', 0),
+(6, 'aa', 'aa', 'aa', '$2y$10$iAI2ftFQVfE70Ve.NP5QQuccITSk2.STjCEOcllqlcfjfG8aJXHRW', 0, 'herve974.30@gmail.com', 0),
+(7, 'zz', 'zz', 'zz', '$2y$10$fA18MZr/UbnWSJhC9nM7pOSRRAQx92Io.KWNTx3jENos8kWgGApwa', 0, 'herve974.30@gmail.com', 0),
+(8, 'ee', 'ee', 'ee', '$2y$10$9jiXa9/PG08raVL3UNfAtO.35PmURhPw9iIaD9mB.MvDu8Gxx8Kri', 0, 'herve974.30@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -113,6 +119,28 @@ INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VA
 (3, 1, 2, 3, '2019-06-20 02:30:00'),
 (4, 1, 2, 3, '1980-08-26 02:30:37'),
 (5, 3, 1, 3, '2019-04-12 12:44:19');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `verification`
+--
+
+CREATE TABLE `verification` (
+  `adh` int(11) NOT NULL,
+  `code` varchar(64) NOT NULL,
+  `dateVerif` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `verification`
+--
+
+INSERT INTO `verification` (`adh`, `code`, `dateVerif`) VALUES
+(5, '5cb18fd0d8d97', '2019-04-13 07:29:20'),
+(6, '5cb1913fdec85', '2019-04-13 07:35:27'),
+(7, '5cb1a4aadab19', '2019-04-13 08:58:18'),
+(8, '5cb1a6c7b7dfd', '2019-04-13 09:07:19');
 
 -- --------------------------------------------------------
 
@@ -205,10 +233,16 @@ ALTER TABLE `trajet`
   ADD KEY `fin_vil_FK` (`fin`);
 
 --
+-- Index pour la table `verification`
+--
+ALTER TABLE `verification`
+  ADD KEY `Verif_adh_FK` (`adh`);
+
+--
 -- Index pour la table `ville`
 --
 ALTER TABLE `ville`
-  ADD PRIMARY KEY (`id_ville`) USING BTREE;
+  ADD PRIMARY KEY (`id_ville`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -218,7 +252,7 @@ ALTER TABLE `ville`
 -- AUTO_INCREMENT pour la table `adherant`
 --
 ALTER TABLE `adherant`
-  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `trajet`
@@ -262,6 +296,12 @@ ALTER TABLE `propose`
 ALTER TABLE `trajet`
   ADD CONSTRAINT `deb_vil_FK` FOREIGN KEY (`debut`) REFERENCES `ville` (`id_ville`),
   ADD CONSTRAINT `fin_vil_FK` FOREIGN KEY (`fin`) REFERENCES `ville` (`id_ville`);
+
+--
+-- Contraintes pour la table `verification`
+--
+ALTER TABLE `verification`
+  ADD CONSTRAINT `Verif_adh_FK` FOREIGN KEY (`adh`) REFERENCES `adherant` (`id_adh`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
