@@ -1,5 +1,5 @@
 <?php include ("header.php");?>
-z
+
 <div class="container mt-5 py-4 rounded shadow-lg">
     <h3 class="text-center mb-5">Ajouter un nouveau trajet</h3>
     <form action="?ctrl=trajet&mth=add" method="post">

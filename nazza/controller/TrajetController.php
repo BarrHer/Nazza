@@ -42,10 +42,22 @@ class TrajetController {
             if (empty($_SESSION)){
                 $errors['trajetDate'] = 'u nid an acount';
             }
+            else {
+                $idAdh = $_SESSION['id'];
+            }
             session_write_close();
+            
             if (empty($errors)) {
+                // add : insérer trajet dans db
                 $add = $this->trajets->add($_POST);
-                
+                // récupération du dernier id trajet
+                $idTrajet = $this->trajets->getTrajetId();
+
+                //var_dump($idTrajet[0]["LAST_INSERT_ID()"]);
+
+                // ajout de l'id du trajet avec l'id de l'adh dans la table propose
+                $propose = $this->trajets->propose($idTrajet[0]["LAST_INSERT_ID()"], $idAdh);
+
                 if ($add) {
                     echo "oui";
                 } 
@@ -59,5 +71,16 @@ class TrajetController {
         }
         
         include "TrajetViewer.php";
+    }
+
+    public function delTraj() {
+        $del = $this->trajets->delTraj($_GET['id']);
+        if ($del) {
+            $msg = "Le trajet ". $_GET['id']." a été supprimé.";
+        } 
+        else {
+            $msg = "Impossible de supprimer le trajet!";
+        }
+        header('Location: ?ctrl=Accueil&mth=index');
     }
 }
