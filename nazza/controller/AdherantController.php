@@ -162,6 +162,8 @@ class AdherantController {
                 $modification = $this->adherants->update($_POST,$_SESSION['id']);
                 session_start();
                 $data = $this->adherants->getAdherant($_SESSION['id']);
+                $_SESSION['id'] = $data['id_adh'];
+                $_SESSION['pseudo'] = $data['pseudo'];
                 session_write_close();
                 if ($modification) {
                     $msg = "L'adherant ".$_POST['prenom'].$_POST['nom']." a été modifié!";

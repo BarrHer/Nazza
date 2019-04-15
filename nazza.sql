@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  sam. 13 avr. 2019 à 12:13
--- Version du serveur :  10.1.38-MariaDB
--- Version de PHP :  7.3.3
+-- Hôte : localhost:3306
+-- Généré le :  lun. 15 avr. 2019 à 00:51
+-- Version du serveur :  5.7.23
+-- Version de PHP :  7.1.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,9 +44,8 @@ CREATE TABLE `adherant` (
 --
 
 INSERT INTO `adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `mdp`, `status`, `email`, `verif`) VALUES
-(1, 'test1', 'test1', 'test1', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test', 0),
 (2, 'modif', 'modif', 'modif', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'modif@modif.modif', 1),
-(3, 'test', 'test', 'test', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test', 1),
+(3, 'test1', 'test1', 'test1', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test', 1),
 (5, 'fusion', 'fusion', 'fusion', '$2y$10$JZMzZewLUe2yY0d8YCVdWOiTNKPC4m/03DIlcGSW82XBlGANihKLi', 0, 'herve974.30@gmail.com', 0),
 (6, 'aa', 'aa', 'aa', '$2y$10$iAI2ftFQVfE70Ve.NP5QQuccITSk2.STjCEOcllqlcfjfG8aJXHRW', 0, 'herve974.30@gmail.com', 0),
 (7, 'zz', 'zz', 'zz', '$2y$10$fA18MZr/UbnWSJhC9nM7pOSRRAQx92Io.KWNTx3jENos8kWgGApwa', 0, 'herve974.30@gmail.com', 0),
@@ -115,10 +114,9 @@ CREATE TABLE `trajet` (
 --
 
 INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
-(2, 1, 2, 2, '2019-03-27 10:22:59'),
-(3, 1, 2, 3, '2019-06-20 02:30:00'),
-(4, 1, 2, 3, '1980-08-26 02:30:37'),
-(5, 3, 1, 3, '2019-04-12 12:44:19');
+(8, 2, 1, 8, '2019-04-15 07:38:24'),
+(9, 7, 1, 7, '2019-04-15 07:38:30'),
+(10, 4, 1, 4, '2019-04-15 07:44:16');
 
 -- --------------------------------------------------------
 
@@ -160,7 +158,7 @@ CREATE TABLE `ville` (
 --
 
 INSERT INTO `ville` (`id_ville`, `nom_ville`, `longitude`, `latitude`) VALUES
-(1, 'Saint-joseph', 3, 8),
+(1, 'Lycée Pierre Poivre', 0.5, 0.6),
 (2, 'Saint-Pierre', 1, 2),
 (3, 'Saint-Denis', 121, 1),
 (4, 'Saint-André', 1, 1),
@@ -186,6 +184,7 @@ INSERT INTO `ville` (`id_ville`, `nom_ville`, `longitude`, `latitude`) VALUES
 (24, 'Saint-Benoît', 2, 2),
 (25, 'Saint-Gilles les Bains', 2, 2),
 (26, 'Sainte-Clotilde', 1, 2),
+(28, 'Saint-Joseph', 3, 8),
 (29, 'Sainte-Anne', 1, 2);
 
 --
@@ -252,13 +251,13 @@ ALTER TABLE `ville`
 -- AUTO_INCREMENT pour la table `adherant`
 --
 ALTER TABLE `adherant`
-  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Contraintes pour les tables déchargées
