@@ -40,6 +40,11 @@ class AccueilController
     public function recherche()
 	{
 		$traj2 = $this->trajets->getAllTrajet();
+		session_start();
+		if (!empty($_SESSION)){
+		$proposeId = $this->trajets->getProposeId($_SESSION['id']);
+		}
+		session_write_close();
 		
 		foreach ($traj2 as $key => $value) {
 			 

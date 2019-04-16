@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  lun. 15 avr. 2019 à 22:36
--- Version du serveur :  10.1.38-MariaDB
--- Version de PHP :  7.3.3
+-- Hôte : localhost:3306
+-- Généré le :  mar. 16 avr. 2019 à 02:59
+-- Version du serveur :  5.7.23
+-- Version de PHP :  7.1.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -99,11 +99,6 @@ CREATE TABLE `propose` (
 -- Déchargement des données de la table `propose`
 --
 
-INSERT INTO `propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
-(19, 3),
-(20, 3),
-(21, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -126,9 +121,7 @@ INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VA
 (8, 2, 1, 8, '2019-04-15 07:38:24'),
 (9, 7, 1, 7, '2019-04-15 07:38:30'),
 (10, 4, 1, 4, '2019-04-15 07:44:16'),
-(12, 19, 1, 3, '2019-04-15 18:03:55'),
-(20, 20, 1, 5, '2019-04-15 19:08:12'),
-(21, 19, 1, 1, '2019-04-15 19:43:28');
+(12, 19, 1, 3, '2019-04-15 18:03:55');
 
 -- --------------------------------------------------------
 
@@ -269,7 +262,7 @@ ALTER TABLE `adherant`
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Contraintes pour les tables déchargées
@@ -298,8 +291,7 @@ ALTER TABLE `personnel`
 -- Contraintes pour la table `propose`
 --
 ALTER TABLE `propose`
-  ADD CONSTRAINT `Propose_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `adherant` (`id_adh`),
-  ADD CONSTRAINT `Propose_Trajet_FK` FOREIGN KEY (`id_trajet_Propose`) REFERENCES `trajet` (`id_trajet`);
+  ADD CONSTRAINT `Propose_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `adherant` (`id_adh`);
 
 --
 -- Contraintes pour la table `trajet`

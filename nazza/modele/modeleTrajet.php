@@ -48,4 +48,11 @@ class trajet extends ConnexionDB  {
 		return $sql->rowCount();
 	}
 
+	public function delTrajPropose($id)
+	{
+		$sql = $this->cnx->prepare("DELETE FROM propose WHERE id_trajet_Propose = ?");
+		$sql->execute( array($id) );
+		return $sql->rowCount();
+	}
+
 }

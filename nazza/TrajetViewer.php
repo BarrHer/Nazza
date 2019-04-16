@@ -58,7 +58,7 @@ function verif(input){
     var ville1 = document.getElementById('inputAddress').value;
     var ville2 = document.getElementById('inputAddress2').value;
     if (input == 1){
-        if (ville1 != 0){
+        if (ville1 != 1){
         ville1 = document.getElementById('inputAddress');
         document.getElementById('inputAddress2').value = 1;
         }
@@ -67,7 +67,7 @@ function verif(input){
         }
     }
     else {
-        if (ville2 != 0){
+        if (ville2 != 1){
         ville2 = document.getElementById('inputAddress2');
         document.getElementById('inputAddress').value = 1;
         }

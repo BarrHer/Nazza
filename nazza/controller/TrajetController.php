@@ -75,6 +75,7 @@ class TrajetController {
 
     public function delTraj() {
         $del = $this->trajets->delTraj($_GET['id']);
+        $delPropose = $this->trajets->delTrajPropose($_GET['id']);
         if ($del) {
             $msg = "Le trajet ". $_GET['id']." a été supprimé.";
         } 
