@@ -40,7 +40,7 @@ class TrajetController {
             }
             session_start();
             if (empty($_SESSION)){
-                $errors['trajetDate'] = 'u nid an acount';
+                $errors['compte'] = 'u nid an acount';
             }
             else {
                 $idAdh = $_SESSION['id'];
@@ -81,6 +81,25 @@ class TrajetController {
         } 
         else {
             $msg = "Impossible de supprimer le trajet!";
+        }
+        header('Location: ?ctrl=Accueil&mth=index');
+    }
+
+    public function est_passage() {
+        session_start();
+        if (empty($_SESSION)){
+            $errors['compte'] = 'u nid an acount';
+        }
+        else {
+            $idAdh = $_SESSION['id'];
+        }
+        session_write_close();
+        $join = $this->trajets->est_passage($_GET['id'], $idAdh);
+        if ($join) {
+            $msg = "Le trajet ". $_GET['id']." a été rejoint.";
+        } 
+        else {
+            $msg = "Impossible de rejoindre le trajet!";
         }
         header('Location: ?ctrl=Accueil&mth=index');
     }

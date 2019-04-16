@@ -35,6 +35,14 @@ class trajet extends ConnexionDB  {
 		return $sql->rowCount();
 	}
 
+	public function est_passage($idTrajet,$idAdh)
+	{
+		$sql = $this->cnx->prepare("INSERT INTO est_passage (id_trajet_est_passage,id_adh_Adherant) 
+        VALUES (?,?)");
+		$sql->execute( array($idTrajet,$idAdh));
+		return $sql->rowCount();
+	}
+
 	public function getProposeId($idAdh) {
 		$sql = $this->cnx->prepare("SELECT id_trajet_Propose FROM propose WHERE id_adh_Adherant=?  ");
 		$sql->execute( array($idAdh) );

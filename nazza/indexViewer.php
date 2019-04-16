@@ -34,7 +34,7 @@
                                     <td><?php echo $dd."/".$mm."/".$yyyy ?></td>
                                     <td><?php echo $heure ?></td>
                                     <td><?php echo $value['nb_places'] ?></td>
-                                    <td><button type='button' class='btn btn-outline-danger'>Rejoindre</button></td>
+                                    <td><button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>Rejoindre</button></td>
                                     </tr>
                                 <?php } ?>
                                 
