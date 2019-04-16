@@ -34,10 +34,24 @@
                                     <td><?php echo $dd."/".$mm."/".$yyyy ?></td>
                                     <td><?php echo $heure ?></td>
                                     <td><?php echo $value['nb_places'] ?></td>
-                                    <td><button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>Rejoindre</button></td>
+                                    <td><?php $test = 0; 
+                                    if (isset($passageId) && !empty($passageId)) {
+                                        foreach ($passageId as $k1 => $v1) {
+                                            if ($v1["id_trajet_est_passage"] == $value['id_trajet'] && $test==0) { 
+                                                $test = 1; 
+                                            }
+                                        }
+                                if ($test == 1){ ?>
+                                    <button type='button' onClick="window.location = '?ctrl=trajet&mth=delTrajPassage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-info'>Annuler</button>
+                                <?php } else { ?>
+                                    <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>Rejoindre</button>
+                                <?php }
+                                } else { ?>
+                                    <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>Rejoindre</button>
+                                    
+                                <?php } } ?>
+                                    </td>
                                     </tr>
-                                <?php } ?>
-                                
                                 </tbody>
                             </table>
                         </div>

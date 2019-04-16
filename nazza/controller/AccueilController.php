@@ -22,6 +22,7 @@ class AccueilController
 		session_start();
 		if (!empty($_SESSION)){
 		$proposeId = $this->trajets->getProposeId($_SESSION['id']);
+		$passageId = $this->trajets->getPassageId($_SESSION['id']);
 		}
 		session_write_close();
 		
@@ -43,6 +44,7 @@ class AccueilController
 		session_start();
 		if (!empty($_SESSION)){
 		$proposeId = $this->trajets->getProposeId($_SESSION['id']);
+		$passageId = $this->trajets->getPassageId($_SESSION['id']);
 		}
 		session_write_close();
 		

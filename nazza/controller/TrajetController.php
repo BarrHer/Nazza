@@ -103,4 +103,15 @@ class TrajetController {
         }
         header('Location: ?ctrl=Accueil&mth=index');
     }
+
+    public function delTrajPassage() {
+        $delPassage = $this->trajets->delTrajPassage($_GET['id']);
+        if ($del) {
+            $msg = "Le trajet ". $_GET['id']." a été annulé.";
+        } 
+        else {
+            $msg = "Impossible d'annuler le trajet!";
+        }
+        header('Location: ?ctrl=Accueil&mth=index');
+    }
 }

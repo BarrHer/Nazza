@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le :  mar. 16 avr. 2019 à 02:59
--- Version du serveur :  5.7.23
--- Version de PHP :  7.1.21
+-- Hôte : 127.0.0.1
+-- Généré le :  mar. 16 avr. 2019 à 21:36
+-- Version du serveur :  10.1.38-MariaDB
+-- Version de PHP :  7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -95,10 +95,6 @@ CREATE TABLE `propose` (
   `id_adh_Adherant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `propose`
---
-
 -- --------------------------------------------------------
 
 --
@@ -122,6 +118,16 @@ INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VA
 (9, 7, 1, 7, '2019-04-15 07:38:30'),
 (10, 4, 1, 4, '2019-04-15 07:44:16'),
 (12, 19, 1, 3, '2019-04-15 18:03:55');
+
+--
+-- Déclencheurs `trajet`
+--
+DELIMITER $$
+CREATE TRIGGER `delTraj` BEFORE DELETE ON `trajet` FOR EACH ROW BEGIN
+    DELETE FROM propose WHERE id_trajet_Propose=OLD.id_trajet;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -256,13 +262,13 @@ ALTER TABLE `ville`
 -- AUTO_INCREMENT pour la table `adherant`
 --
 ALTER TABLE `adherant`
-  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Contraintes pour les tables déchargées

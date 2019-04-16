@@ -43,6 +43,12 @@ class trajet extends ConnexionDB  {
 		return $sql->rowCount();
 	}
 
+	public function getPassageId($idAdh) {
+		$sql = $this->cnx->prepare("SELECT id_trajet_est_passage FROM est_passage WHERE id_adh_Adherant=?  ");
+		$sql->execute( array($idAdh) );
+		return $sql->fetchAll();
+	}
+
 	public function getProposeId($idAdh) {
 		$sql = $this->cnx->prepare("SELECT id_trajet_Propose FROM propose WHERE id_adh_Adherant=?  ");
 		$sql->execute( array($idAdh) );
@@ -59,6 +65,13 @@ class trajet extends ConnexionDB  {
 	public function delTrajPropose($id)
 	{
 		$sql = $this->cnx->prepare("DELETE FROM propose WHERE id_trajet_Propose = ?");
+		$sql->execute( array($id) );
+		return $sql->rowCount();
+	}
+
+	public function delTrajPassage($id)
+	{
+		$sql = $this->cnx->prepare("DELETE FROM est_passage WHERE id_trajet_est_passage = ?");
 		$sql->execute( array($id) );
 		return $sql->rowCount();
 	}
