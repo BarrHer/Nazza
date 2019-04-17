@@ -8,8 +8,8 @@
             <select id="inputAddress" name="inputAddress" class="form-control" onchange="verif(1);">
             <option value="0">--</option>
             <?php foreach ($villes as $key => $value) {
-                echo '<option value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';
-            } ?>  
+                echo '<option value="'.$value['id_ville'].'" onClick="addMarkerA('.$value['longitude'].','.$value['latitude'].')" >'.$value['nom_ville'].'</option>';
+                } ?> 
             </select> 
         </div>
         <div class="form-group">
@@ -17,8 +17,8 @@
             <select id="inputAddress2" name="inputAddress2" class="form-control" onchange="verif(2);">
                 <option value="0">--</option>
                 <?php foreach ($villes as $key => $value) {
-                echo '<option value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';
-            } ?>  
+                echo '<option value="'.$value['id_ville'].'" onClick="addMarkerB('.$value['longitude'].','.$value['latitude'].')" >'.$value['nom_ville'].'</option>';
+                } ?>  
             </select> 
         </div>
         <div class="form-row">
@@ -59,7 +59,6 @@ function verif(input){
     var ville2 = document.getElementById('inputAddress2').value;
     if (input == 1){
         if (ville1 != 1){
-        ville1 = document.getElementById('inputAddress');
         document.getElementById('inputAddress2').value = 1;
         }
         else {
@@ -68,7 +67,6 @@ function verif(input){
     }
     else {
         if (ville2 != 1){
-        ville2 = document.getElementById('inputAddress2');
         document.getElementById('inputAddress').value = 1;
         }
         else {
@@ -78,8 +76,92 @@ function verif(input){
     
 }
 
-
-
 </script>
 
+<!-- Map -->
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 500px;
+        width: 50%;
+        padding-left:0px;
+        padding-right:0px;
+      }
+    </style>
+
+<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+
+<div id="map" class="map container mt-3 "></div>
+    <script type="text/javascript">
+    $Long = 55.536384;
+    $Lat = -21.115141;
+    
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([$Long,$Lat]),
+          zoom: 10
+        })
+      });
+    
+
+    function addMarkerA(LongA, LatA){
+        var markerA = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([LongA,LatA])
+            ),
+        });
+        var vectorSourceA = new ol.source.Vector({
+            features: [markerA]
+        });
+        var markerVectorLayerA = new ol.layer.Vector({
+            source: vectorSourceA,
+        });
+        map.addLayer(markerVectorLayerA);
+
+        markerA.setStyle(new ol.style.Style({
+            image: new ol.style.Icon(({
+                crossOrigin: 'anonymous',
+                src: 'image/a.png',
+                scale: 0.40
+            }))
+        }));
+    }
+
+    function addMarkerB(LongB, LatB){
+
+        var markerB = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([LongB, LatB])
+            ),
+        });
+
+        var vectorSourceB = new ol.source.Vector({
+            features: [markerB],
+        });
+        var markerVectorLayerB = new ol.layer.Vector({
+            source: vectorSourceB,
+        });
+        
+        map.addLayer(markerVectorLayerB);
+
+        markerB.setStyle(new ol.style.Style({
+            image: new ol.style.Icon(({
+                crossOrigin: 'anonymous',
+                src: 'image/b.png',
+                
+                scale: 0.40
+            }))
+        }));
+    }
+
+</script> 
+<br><br><br><br>
 <?php include ("footer.php"); ?>
