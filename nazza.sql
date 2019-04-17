@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  mar. 16 avr. 2019 à 21:36
--- Version du serveur :  10.1.38-MariaDB
--- Version de PHP :  7.3.3
+-- Hôte : localhost:3306
+-- Généré le :  mer. 17 avr. 2019 à 05:01
+-- Version du serveur :  5.7.23
+-- Version de PHP :  7.1.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -95,6 +95,14 @@ CREATE TABLE `propose` (
   `id_adh_Adherant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `propose`
+--
+
+INSERT INTO `propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
+(35, 3),
+(39, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -117,7 +125,9 @@ INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VA
 (8, 2, 1, 8, '2019-04-15 07:38:24'),
 (9, 7, 1, 7, '2019-04-15 07:38:30'),
 (10, 4, 1, 4, '2019-04-15 07:44:16'),
-(12, 19, 1, 3, '2019-04-15 18:03:55');
+(12, 19, 1, 3, '2019-04-15 18:03:55'),
+(35, 5, 1, 8, '2019-04-17 11:56:57'),
+(39, 5, 1, 9, '2019-04-17 11:58:52');
 
 --
 -- Déclencheurs `trajet`
@@ -170,7 +180,7 @@ CREATE TABLE `ville` (
 
 INSERT INTO `ville` (`id_ville`, `nom_ville`, `longitude`, `latitude`) VALUES
 (1, 'Lycée Pierre Poivre', 0.5, 0.6),
-(2, 'Saint-Pierre', 1, 2),
+(2, 'Saint-Pierre', 55.4833, -21.3167),
 (3, 'Saint-Denis', 121, 1),
 (4, 'Saint-André', 1, 1),
 (5, 'Le Port', 1, 1),
@@ -195,7 +205,7 @@ INSERT INTO `ville` (`id_ville`, `nom_ville`, `longitude`, `latitude`) VALUES
 (24, 'Saint-Benoît', 2, 2),
 (25, 'Saint-Gilles les Bains', 2, 2),
 (26, 'Sainte-Clotilde', 1, 2),
-(28, 'Saint-Joseph', 3, 8),
+(28, 'Saint-Joseph', 55.6167, -21.3667),
 (29, 'Sainte-Anne', 1, 2);
 
 --
@@ -268,7 +278,7 @@ ALTER TABLE `adherant`
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Contraintes pour les tables déchargées

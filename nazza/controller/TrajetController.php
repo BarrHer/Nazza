@@ -82,7 +82,12 @@ class TrajetController {
         else {
             $msg = "Impossible de supprimer le trajet!";
         }
-        header('Location: ?ctrl=Accueil&mth=index');
+        if ($_GET['page'] == 1){
+            header('Location: ?ctrl=Accueil&mth=recherche');
+        } else {
+            header('Location: ?ctrl=Accueil&mth=index');
+        }
+        
     }
 
     public function est_passage() {
@@ -101,7 +106,11 @@ class TrajetController {
         else {
             $msg = "Impossible de rejoindre le trajet!";
         }
-        header('Location: ?ctrl=Accueil&mth=index');
+        if ($_GET['page'] == 1){
+            header('Location: ?ctrl=Accueil&mth=recherche');
+        } else {
+            header('Location: ?ctrl=Accueil&mth=index');
+        }
     }
 
     public function delTrajPassage() {
@@ -112,6 +121,10 @@ class TrajetController {
         else {
             $msg = "Impossible d'annuler le trajet!";
         }
-        header('Location: ?ctrl=Accueil&mth=index');
+        if ($_GET['page'] == 1){
+            header('Location: ?ctrl=Accueil&mth=recherche');
+        } else {
+            header('Location: ?ctrl=Accueil&mth=index');
+        }
     }
 }

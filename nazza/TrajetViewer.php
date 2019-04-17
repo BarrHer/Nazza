@@ -24,7 +24,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="NbPlace">Nombres de passagers</label>
-                <input id="NbPlace" name="NbPlace" type="text" class="form-control">
+                <input id="NbPlace" name="NbPlace" type="number" class="form-control" min='1' max='7'>
             </div>
             <div class="form-group col-md-4">
                 <label for="trajetHeure">Heure</label>
