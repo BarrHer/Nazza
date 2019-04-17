@@ -297,7 +297,8 @@ ALTER TABLE `personnel`
 -- Contraintes pour la table `propose`
 --
 ALTER TABLE `propose`
-  ADD CONSTRAINT `Propose_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `adherant` (`id_adh`);
+  ADD CONSTRAINT `Propose_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `adherant` (`id_adh`),
+  ADD CONSTRAINT `Propose_Trajet_FK` FOREIGN KEY (`id_trajet_Propose`) REFERENCES `trajet` (`id_trajet`);
 
 --
 -- Contraintes pour la table `trajet`
