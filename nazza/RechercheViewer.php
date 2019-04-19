@@ -1,11 +1,10 @@
 <?php include ("header.php"); ?>
 
 <div class="container mt-5 rounded shadow-lg" style="min-height:518px">
-  <h2>Filterable Table</h2>
-  <p>Type something in the input field to search the table for first names, last names or emails:</p>  
-  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <h2>Rechercher un trajet</h2>
+  <input class="form-control" id="myInput" type="text" placeholder="Ex : Le Tampon..">
   <br>
-  <table class="table table-bordered table-responsive-sm text-center">
+  <table class="table table-responsive-sm text-center">
     <thead>
       <tr>
         <th></th>
@@ -17,7 +16,7 @@
         <th></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
     <?php  foreach ($traj as $key => $value) {
             list($date, $heure) = explode(" ", $traj[$key]['dateTrajet']);
             list($yyyy, $mm, $dd) = explode("-", $date); ?><tr id='indextr'> 
