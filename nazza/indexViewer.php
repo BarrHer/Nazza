@@ -30,11 +30,11 @@
                                 <td><?php $verif = 0; 
                                 if (isset($proposeId)) {foreach ($proposeId as $k => $v) {
                                 if ($v["id_trajet_Propose"] == $value['id_trajet']) { $verif = 1; ?><button type='button' onClick="window.location = '?ctrl=trajet&mth=delTraj&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>X</button><?php } } } ?></td>
-                                    <td class='clickable-row' data-href='?ctrl=Accueil&mth=trajet'><?php echo $value['debut']['nom_ville'] ?></td>
-                                    <td class='clickable-row' data-href='?ctrl=Accueil&mth=trajet'><?php echo $value['fin']['nom_ville'] ?></td>
-                                    <td class='clickable-row' data-href='?ctrl=Accueil&mth=trajet'><?php echo $dd."/".$mm."/".$yyyy ?></td>
-                                    <td class='clickable-row' data-href='?ctrl=Accueil&mth=trajet'><?php echo $heure ?></td>
-                                    <td class='clickable-row' data-href='?ctrl=Accueil&mth=trajet'><?php echo $value['nb_places'] ?></td>
+                                    <td class='clickable-row' data-id="<?php echo $value['id_trajet'] ?>"><?php echo $value['debut']['nom_ville'] ?></td>
+                                    <td class='clickable-row' data-id="<?php echo $value['id_trajet'] ?>"><?php echo $value['fin']['nom_ville'] ?></td>
+                                    <td class='clickable-row' data-id="<?php echo $value['id_trajet'] ?>"><?php echo $dd."/".$mm."/".$yyyy ?></td>
+                                    <td class='clickable-row' data-id="<?php echo $value['id_trajet'] ?>"><?php echo $heure ?></td>
+                                    <td class='clickable-row' data-id="<?php echo $value['id_trajet'] ?>"><?php echo $value['nb_places'] ?></td>
                                     <td><?php $test = 0; 
                                     if (isset($passageId) && !empty($passageId)) {
                                         foreach ($passageId as $k1 => $v1) {
@@ -73,11 +73,47 @@
             </div>
         </div>
     </div>
+
+    <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <?php echo $_GET['idTrajet']; ?>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 </div>
+<?php if (!empty($_GET)){ ?>
+    <script>
+    $("#myModal").modal();
+    </script>
+    
+    <?php } ?>
 <script>
 jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
+        var id = $(this).data("id");
+        //var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?idTrajet=' + id;
+        window.location='?idTrajet=' + id;
+        //console.log($(this).data("id"));
+        //window.history.pushState({ path: newurl }, '', newurl);
+        $("#myModal").modal();
     });
 });
 </script>
