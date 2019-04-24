@@ -114,7 +114,15 @@ class TrajetController {
     }
 
     public function delTrajPassage() {
-        $delPassage = $this->trajets->delTrajPassage($_GET['id']);
+        session_start();
+        if (empty($_SESSION)){
+            $errors['compte'] = 'u nid an acount';
+        }
+        else {
+            $idAdh = $_SESSION['id'];
+        }
+        session_write_close();
+        $delPassage = $this->trajets->delTrajPassage($_GET['id'], $idAdh);
         if ($del) {
             $msg = "Le trajet ". $_GET['id']." a été annulé.";
         } 

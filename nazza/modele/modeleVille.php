@@ -14,7 +14,5 @@ class ville extends ConnexionDB  {
 		$sql->execute( array($id) );
 		return $sql->fetch();
     }
-	
-		
 
 }
