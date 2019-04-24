@@ -1,24 +1,24 @@
-<?php include ("header.php"); ?>
+<?php include ("header.php");?>
 
 <div class="container mt-5 py-4 rounded shadow-lg">
     <form action="?ctrl=Adherant&mth=modification" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value=<?php echo $data['nom']?>>
             </div>
             <div class="form-group col-md-6">
                 <label for="prenom">Prenom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom">
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom" value=<?php echo $data['prenom']?>>
             </div>
         </div>
         <div class="form-group">
             <label for="pseudo">Pseudo</label>
-            <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
+            <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo" value=<?php echo $data['pseudo']?>>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value=<?php echo $data['email']?>>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">

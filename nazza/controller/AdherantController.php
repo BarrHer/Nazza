@@ -48,8 +48,7 @@ class AdherantController {
                 //$errors['captcha'] = 'Vous êtes probablement un robot, réessayer ulterieurement';
             }
             $msg = $recaptcha->score;
-
-
+            
             if (empty($errors)) {
                 $inscription = $this->adherants->inscription($_POST);
                 if ($inscription) {
@@ -58,7 +57,6 @@ class AdherantController {
                     $id = $this->adherants->getIdAdherant($_POST['pseudo']);
                     $this->adherants->addverif($id['id_adh'],$code);
                     $this->mailverif($_POST['email'],$id['id_adh'],$code);
-
                     $msg = "L'adherant ".$_POST['prenom'].$_POST['nom']." a été ajouté!";
                 } 
                 else {
@@ -97,26 +95,32 @@ class AdherantController {
 
         $errors = array();
         if (isset($_POST['btnConnexion'])) {
-            $login = $this->adherants->login($_POST['pseudologin'], $_POST['mdplogin']);
-            if ($login) {
-                if ($login['verif'] == true) {
-                    session_start();
-                    
-                    $_SESSION['id'] = $login['id_adh'];
-                    $_SESSION['pseudo'] = $login['pseudo'];
-                    $_SESSION['status'] = $login['status'];
-                    $msg = "Connexion réussie";
-                    header("Location: ?ctrl=Accueil&mth=index");
-                    //$this->index($msg); // Redirection vers l'index
-                } else {
-                    echo "Veuillez vérifier votre compte.";
-                    //Ajout d'une page dédié à la verif email
+            $login = $this->adherants->login($_POST['pseudologin']);
+            if ($login){
+                if (password_verify($_POST['mdplogin'],$login['mdp'])) {
+                    if ($login['verif'] == true) {
+                        session_start();
+                        
+                        $_SESSION['id'] = $login['id_adh'];
+                        $_SESSION['pseudo'] = $login['pseudo'];
+                        $_SESSION['status'] = $login['status'];
+                        $msg = "Connexion réussie";
+                        header("Location: ?ctrl=Accueil&mth=index");
+                        //$this->index($msg); // Redirection vers l'index
+                    }
+                    else {
+                        echo "Veuillez vérifier votre compte.";
+                        //Ajout d'une page dédié à la verif email
+                    }
                 }
-            } 
-            else {
-                echo "Mauvais pseudo ou mot de passe";
+                else {
+                    echo "Mauvais pseudo ou mot de passe";
+                }
             }
-        }        
+            else {
+                echo "Erreur";
+            }   
+        }    
         include 'ConnexionViewer.php';
     }
 
@@ -130,13 +134,15 @@ class AdherantController {
     }
 
     public function modification(){
-        
+        session_start();
+        $data = $this->adherants->getAdherant($_SESSION['id']);
+        session_write_close();
         $errors = array();
 
         if (isset($_POST['btnModification'])) {
-            session_start();
-            session_write_close();
-            /*if (empty($_POST['prenom'])) {
+            
+            
+            if (empty($_POST['prenom'])) {
                 $errors['prenom'] = 'Le prénom doit être rempli';
             }
             if (empty($_POST['nom'])) {
@@ -148,21 +154,33 @@ class AdherantController {
             if (empty($_POST['pseudo'])) {
                 $errors['pseudo'] = 'Le pseudo doit être remplie';
             }
-            if (empty($_POST['mdp'])) {
-                $errors['mdp'] = 'Le mdp doit être remplie';
-            }*/
+            if ($_POST['mdp'] != $_POST['cmdp']){
+                $errors['cmdp'] = 'Le mdp doit correspondre à la confirmation de mot de passe';
+            }
+
             if (empty($errors)) {
                 $modification = $this->adherants->update($_POST,$_SESSION['id']);
+                session_start();
+                $data = $this->adherants->getAdherant($_SESSION['id']);
+                $_SESSION['id'] = $data['id_adh'];
+                $_SESSION['pseudo'] = $data['pseudo'];
+                session_write_close();
                 if ($modification) {
-                    $msg = "L'adherant ".$_POST['prenom'].$_POST['nom']." a été ajouté!";
+                    $msg = "L'adherant ".$_POST['prenom'].$_POST['nom']." a été modifié!";
                 } 
                 else {
-                    $msg = "Impossible d'ajouter l'adherant!";
+                    $msg = "Impossible de modifier l'adherant!";
                 }
                 //$this->accueils->index($msg); // Redirection vers l'index
             }
         }
         include 'ModificationAdhViewer.php';
+    }
+
+    public function suppression(){
+        session_start();
+        $delete = $this->adherants->delete($_SESSION['id']);
+        $deconnexion = $this->deconnexion();
     }
 
 }

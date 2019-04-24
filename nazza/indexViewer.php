@@ -13,28 +13,45 @@
                             <table class="table table-responsive-sm">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th>Debut</th>
                                     <th>Fin</th>
                                     <th>Date</th>
                                     <th>Heure</th>
                                     <th>Places</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php  foreach ($traj as $key => $value) {
                                     list($date, $heure) = explode(" ", $traj[$key]['dateTrajet']);
-                                    list($yyyy, $mm, $dd) = explode("-", $date);
-                                    echo "<tr> 
-                                 
-                                  <td>".$value['debut']['nom_ville']."</td>
-                                  <td>".$value['fin']['nom_ville']."</td>
-                                  <td>".$dd."/".$mm."/".$yyyy."</td>
-                                  <td>".$heure."</td>
-                                  <td>".$value['nb_places']."</td>
-                                  </tr>";
-                                }
-                                // Remplacer pseudo par mail
-                                ?>
+                                    list($yyyy, $mm, $dd) = explode("-", $date); ?><tr> 
+                                
+                                <td><?php if (isset($proposeId)) {foreach ($proposeId as $k => $v) {
+                                if ($v["id_trajet_Propose"] == $value['id_trajet']) { ?><button type='button' onClick="window.location = '?ctrl=trajet&mth=delTraj&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>X</button><?php } } } ?></td>
+                                    <td><?php echo $value['debut']['nom_ville'] ?></td>
+                                    <td><?php echo $value['fin']['nom_ville'] ?></td>
+                                    <td><?php echo $dd."/".$mm."/".$yyyy ?></td>
+                                    <td><?php echo $heure ?></td>
+                                    <td><?php echo $value['nb_places'] ?></td>
+                                    <td><?php $test = 0; 
+                                    if (isset($passageId) && !empty($passageId)) {
+                                        foreach ($passageId as $k1 => $v1) {
+                                            if ($v1["id_trajet_est_passage"] == $value['id_trajet'] && $test==0) { 
+                                                $test = 1; 
+                                            }
+                                        }
+                                if ($test == 1){ ?>
+                                    <button type='button' onClick="window.location = '?ctrl=trajet&mth=delTrajPassage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-info'>Annuler</button>
+                                <?php } else { ?>
+                                    <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>Rejoindre</button>
+                                <?php }
+                                } else { ?>
+                                    <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>Rejoindre</button>
+                                    
+                                <?php } } ?>
+                                    </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

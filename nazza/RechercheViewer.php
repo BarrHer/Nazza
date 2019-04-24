@@ -8,36 +8,33 @@
   <table class="table table-bordered table-responsive-sm">
     <thead>
       <tr>
+        <th></th>
         <th>Debut</th>
         <th>Fin</th>
         <th>Date</th>
         <th>Heure</th>
         <th>Places</th>
+        <th></th>
       </tr>
     </thead>
     <tbody id="myTable">
-      <?php
-      
-        foreach ($traj as $key => $value) {
-          list($date, $heure) = explode(" ", $traj[$key]['dateTrajet']);
-          list($yyyy, $mm, $dd) = explode("-", $date);
-       echo "<tr> 
-       
-        <td>".$value['debut']['nom_ville']."</td>
-        <td>".$value['fin']['nom_ville']."</td>
-        <td>".$dd."/".$mm."/".$yyyy."</td>
-        <td>".$heure."</td>
-        <td>".$value['nb_places']."</td>
-        </tr>";
-       }
+    <?php  foreach ($traj as $key => $value) {
+        list($date, $heure) = explode(" ", $traj[$key]['dateTrajet']);
+        list($yyyy, $mm, $dd) = explode("-", $date); ?><tr> 
 
-
-        // Remplacer pseudo par mail
-     ?>
+      <td><?php if (isset($proposeId)) {foreach ($proposeId as $k => $v) {
+        if ($v["id_trajet_Propose"] == $value['id_trajet']) { ?><button type='button' onClick="window.location = '?ctrl=trajet&mth=delTraj&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>X</button><?php } } } ?></td>
+          <td><?php echo $value['debut']['nom_ville'] ?></td>
+          <td><?php echo $value['fin']['nom_ville'] ?></td>
+          <td><?php echo $dd."/".$mm."/".$yyyy ?></td>
+          <td><?php echo $heure ?></td>
+          <td><?php echo $value['nb_places'] ?></td>
+          <td><button type='button' class='btn btn-outline-danger'>Rejoindre</button></td>
+        </tr>
+    <?php } ?>
     </tbody>
   </table>
-  
-  <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+
 </div>
 
 <script>
