@@ -78,6 +78,7 @@ class TrajetController {
         $del = $this->trajets->delTraj($_GET['id']);
         $delPropose = $this->trajets->delTrajPropose($_GET['id']);
         if ($del) {
+            // Envoie d'un mail d'avertissement à tout les adherents inscrit à ce trajet
             $msg = "Le trajet ". $_GET['id']." a été supprimé.";
             echo $_GET['id'];
             var_dump($mails);
@@ -91,6 +92,10 @@ class TrajetController {
                     include __DIR__ . '/sendmail.php';
                 }
             }
+            //Historisation
+            session_start();
+            $this->trajets->histoTrajet($_GET['id'],$_SESSION['id'],"Suppression");
+            session_write_close();
         } 
         else {
             $msg = "Impossible de supprimer le trajet!";
@@ -98,6 +103,7 @@ class TrajetController {
         header('Location: ?ctrl=Accueil&mth=index');
     }
 
+    //fonction test inutile
     public function test() {
         $oui = $this->trajets->getEmailPassage(13);
         foreach ($oui as $k => $v) {
@@ -132,8 +138,15 @@ class TrajetController {
 
     public function delTrajPassage() {
         $delPassage = $this->trajets->delTrajPassage($_GET['id']);
-        if ($del) {
+        
+
+        if ($delPassage) {
             $msg = "Le trajet ". $_GET['id']." a été annulé.";
+            echo $msg;
+            //Historisation
+            session_start();
+            $this->trajets->histoTrajet($_GET['id'],$_SESSION['id'],"Quitte");
+            session_write_close();
         } 
         else {
             $msg = "Impossible d'annuler le trajet!";

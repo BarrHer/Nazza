@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le :  mer. 24 avr. 2019 à 05:51
+-- Généré le :  mer. 24 avr. 2019 à 22:41
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.1.21
 
@@ -111,24 +111,26 @@ CREATE TABLE `alt-est_passage` (
 --
 
 INSERT INTO `alt-est_passage` (`id_trajet_est_passage`, `id_adh_Adherant`) VALUES
-(15, 11),
-(14, 11),
-(13, 12),
-(18, 11),
-(23, 11),
-(28, 11),
-(26, 11),
-(25, 11),
-(22, 11),
-(21, 11),
-(20, 11),
-(29, 11);
+(1, 11),
+(1, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(1, 11),
+(1, 11),
+(4, 11),
+(4, 11);
 
 --
 -- Déclencheurs `alt-est_passage`
 --
 DELIMITER $$
-CREATE TRIGGER `historique-rejoindre-trajet` BEFORE INSERT ON `alt-est_passage` FOR EACH ROW INSERT INTO `historique-trajet` (`adh`, `trajet`, `action`) VALUES
+CREATE TRIGGER `historique-rejoindre-trajet` BEFORE INSERT ON `alt-est_passage` FOR EACH ROW INSERT INTO `historique_trajet` (`adh`, `trajet`, `action`) VALUES
 (NEW.id_adh_Adherant , NEW.id_trajet_est_passage , "Rejoindre")
 $$
 DELIMITER ;
@@ -149,28 +151,16 @@ CREATE TABLE `alt-propose` (
 --
 
 INSERT INTO `alt-propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
-(14, 11),
-(15, 11),
-(16, 11),
-(17, 11),
-(18, 11),
-(19, 11),
-(20, 11),
-(21, 11),
-(22, 11),
-(23, 11),
-(24, 11),
-(25, 11),
-(26, 11),
-(27, 11),
-(28, 11),
-(29, 11);
+(1, 11),
+(2, 11),
+(3, 11),
+(4, 11);
 
 --
 -- Déclencheurs `alt-propose`
 --
 DELIMITER $$
-CREATE TRIGGER `historique-ajout-trajet` AFTER INSERT ON `alt-propose` FOR EACH ROW INSERT INTO `historique-trajet` (`adh`, `trajet`, `action`) VALUES
+CREATE TRIGGER `historique-ajout-trajet` AFTER INSERT ON `alt-propose` FOR EACH ROW INSERT INTO `historique_trajet` (`adh`, `trajet`, `action`) VALUES
 (NEW.id_adh_Adherant , NEW.id_trajet_Propose, "Création")
 $$
 DELIMITER ;
@@ -194,23 +184,10 @@ CREATE TABLE `alt-trajet` (
 --
 
 INSERT INTO `alt-trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
-(13, 2, 1, 5, '2019-05-24 04:50:40'),
-(14, 11, 1, 4, '2019-04-24 04:50:51'),
-(15, 1, 8, 2, '2019-04-24 09:39:28'),
-(16, 5, 1, 2, '2019-04-24 11:49:00'),
-(17, 5, 1, 3, '2019-04-24 11:49:04'),
-(18, 7, 1, 3, '2019-04-24 11:49:09'),
-(19, 2, 1, 5, '2019-04-24 11:54:05'),
-(20, 3, 1, 6, '2019-04-24 11:54:09'),
-(21, 4, 1, 4, '2019-04-24 11:54:12'),
-(22, 14, 1, 4, '2019-04-24 11:54:15'),
-(23, 5, 1, 8, '2019-04-24 11:54:19'),
-(24, 3, 1, 8, '2019-04-24 11:54:23'),
-(25, 11, 1, 6, '2019-04-24 11:54:25'),
-(26, 12, 1, 6, '2019-04-24 11:54:28'),
-(27, 1, 14, 3, '2019-04-24 11:54:33'),
-(28, 1, 16, 3, '2019-04-24 11:54:37'),
-(29, 3, 1, 4, '2019-04-24 12:04:03');
+(1, 4, 1, 2, '2019-04-25 05:17:32'),
+(2, 9, 1, 2, '2019-04-25 05:17:37'),
+(3, 1, 13, 3, '2019-04-25 05:17:40'),
+(4, 2, 1, 5, '2019-04-25 05:25:31');
 
 -- --------------------------------------------------------
 
@@ -246,10 +223,10 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `historique-trajet`
+-- Structure de la table `historique_trajet`
 --
 
-CREATE TABLE `historique-trajet` (
+CREATE TABLE `historique_trajet` (
   `adh` int(11) NOT NULL,
   `trajet` int(11) NOT NULL,
   `action` varchar(20) NOT NULL,
@@ -257,34 +234,29 @@ CREATE TABLE `historique-trajet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `historique-trajet`
+-- Déchargement des données de la table `historique_trajet`
 --
 
-INSERT INTO `historique-trajet` (`adh`, `trajet`, `action`, `dateAction`) VALUES
-(12, 13, 'Rejoindre', '2019-04-24 10:26:30'),
-(11, 16, 'Création', '2019-04-24 11:49:04'),
-(11, 17, 'Création', '2019-04-24 11:49:09'),
-(11, 18, 'Création', '2019-04-24 11:49:14'),
-(11, 18, 'Rejoindre', '2019-04-24 11:49:21'),
-(11, 19, 'Création', '2019-04-24 11:54:09'),
-(11, 20, 'Création', '2019-04-24 11:54:11'),
-(11, 21, 'Création', '2019-04-24 11:54:15'),
-(11, 22, 'Création', '2019-04-24 11:54:18'),
-(11, 23, 'Création', '2019-04-24 11:54:23'),
-(11, 24, 'Création', '2019-04-24 11:54:25'),
-(11, 25, 'Création', '2019-04-24 11:54:28'),
-(11, 26, 'Création', '2019-04-24 11:54:31'),
-(11, 27, 'Création', '2019-04-24 11:54:37'),
-(11, 28, 'Création', '2019-04-24 11:54:39'),
-(11, 23, 'Rejoindre', '2019-04-24 11:55:56'),
-(11, 28, 'Rejoindre', '2019-04-24 11:55:56'),
-(11, 26, 'Rejoindre', '2019-04-24 11:55:57'),
-(11, 25, 'Rejoindre', '2019-04-24 11:55:57'),
-(11, 22, 'Rejoindre', '2019-04-24 11:57:18'),
-(11, 21, 'Rejoindre', '2019-04-24 11:57:18'),
-(11, 20, 'Rejoindre', '2019-04-24 11:57:19'),
-(11, 29, 'Création', '2019-04-24 12:04:06'),
-(11, 29, 'Rejoindre', '2019-04-24 12:04:10');
+INSERT INTO `historique_trajet` (`adh`, `trajet`, `action`, `dateAction`) VALUES
+(11, 3, 'Suppression', '2019-04-25 05:25:08'),
+(11, 1, 'Rejoindre', '2019-04-25 05:25:24'),
+(11, 4, 'Création', '2019-04-25 05:25:35'),
+(11, 1, 'Rejoindre', '2019-04-25 05:28:49'),
+(11, 4, 'Rejoindre', '2019-04-25 05:29:09'),
+(11, 4, 'Rejoindre', '2019-04-25 05:29:12'),
+(11, 4, 'Rejoindre', '2019-04-25 05:29:25'),
+(11, 4, 'Rejoindre', '2019-04-25 05:29:42'),
+(11, 4, 'Rejoindre', '2019-04-25 05:30:06'),
+(11, 4, 'Rejoindre', '2019-04-25 05:30:21'),
+(11, 4, 'Rejoindre', '2019-04-25 05:31:10'),
+(11, 4, 'Rejoindre', '2019-04-25 05:31:14'),
+(11, 1, 'Rejoindre', '2019-04-25 05:31:22'),
+(11, 1, 'Rejoindre', '2019-04-25 05:32:05'),
+(11, 1, 'Quitte', '2019-04-25 05:32:05'),
+(11, 4, 'Rejoindre', '2019-04-25 05:32:13'),
+(11, 4, 'Quitte', '2019-04-25 05:32:14'),
+(11, 4, 'Rejoindre', '2019-04-25 05:33:36'),
+(11, 4, 'Quitte', '2019-04-25 05:33:36');
 
 -- --------------------------------------------------------
 
@@ -313,7 +285,8 @@ CREATE TABLE `propose` (
 --
 
 INSERT INTO `propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
-(19, 11);
+(1, 11),
+(4, 11);
 
 --
 -- Déclencheurs `propose`
@@ -343,11 +316,8 @@ CREATE TABLE `trajet` (
 --
 
 INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
-(8, 2, 1, 8, '2019-04-15 07:38:24'),
-(9, 7, 1, 7, '2019-04-15 07:38:30'),
-(10, 4, 1, 4, '2019-04-15 07:44:16'),
-(12, 19, 1, 3, '2019-04-15 18:03:55'),
-(19, 2, 1, 5, '2019-04-24 11:54:05');
+(1, 4, 1, 2, '2019-04-25 05:17:32'),
+(4, 2, 1, 5, '2019-04-25 05:25:31');
 
 --
 -- Déclencheurs `trajet`
@@ -360,7 +330,7 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `historique-trajet` AFTER INSERT ON `trajet` FOR EACH ROW BEGIN
+CREATE TRIGGER `historique_trajet` AFTER INSERT ON `trajet` FOR EACH ROW BEGIN
 	INSERT INTO `alt-trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
 (NEW.id_trajet, NEW.debut, NEW.fin, NEW.nb_places, NEW.dateTrajet);
 END
@@ -490,9 +460,9 @@ ALTER TABLE `est_passage`
   ADD KEY `est_passage_Adherant0_FK` (`id_adh_Adherant`);
 
 --
--- Index pour la table `historique-trajet`
+-- Index pour la table `historique_trajet`
 --
-ALTER TABLE `historique-trajet`
+ALTER TABLE `historique_trajet`
   ADD KEY `hist_adh_FK` (`adh`),
   ADD KEY `hist_trajet_FK` (`trajet`);
 
@@ -543,7 +513,7 @@ ALTER TABLE `adherant`
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -584,9 +554,9 @@ ALTER TABLE `est_passage`
   ADD CONSTRAINT `est_passage_Trajet_FK` FOREIGN KEY (`id_trajet_est_passage`) REFERENCES `trajet` (`id_trajet`);
 
 --
--- Contraintes pour la table `historique-trajet`
+-- Contraintes pour la table `historique_trajet`
 --
-ALTER TABLE `historique-trajet`
+ALTER TABLE `historique_trajet`
   ADD CONSTRAINT `hist_adh_FK` FOREIGN KEY (`adh`) REFERENCES `alt-adherant` (`id_adh`),
   ADD CONSTRAINT `hist_trajet_FK` FOREIGN KEY (`trajet`) REFERENCES `alt-trajet` (`id_trajet`);
 
