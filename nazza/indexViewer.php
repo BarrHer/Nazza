@@ -23,7 +23,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php  foreach ($traj as $key => $value) {
+                                <?php  if (!empty($traj)) {
+                                foreach ($traj as $key => $value) {
                                     list($date, $heure) = explode(" ", $traj[$key]['dateTrajet']);
                                     list($yyyy, $mm, $dd) = explode("-", $date);?>
                                 <tr id='indextr'> 
@@ -56,7 +57,9 @@
                                     <?php } else {  ?>
                                     <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger' <?php if ($verif == 1) {  echo 'disabled'; }?> >Rejoindre</button>
                                     
-                                <?php } } } ?>
+                                <?php } } } } else {
+                                    echo 'Pas de trajet disponible.';
+                                }?>
                                     </td>
                                     </tr>
                                 </tbody>

@@ -36,20 +36,158 @@ CREATE TABLE `adherant` (
   `mdp` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `email` varchar(200) NOT NULL,
-  `verif` tinyint(1) NOT NULL DEFAULT '0'
+  `verif` tinyint(1) NOT NULL DEFAULT '0',
+  `tel` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `adherant`
 --
 
-INSERT INTO `adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `mdp`, `status`, `email`, `verif`) VALUES
-(2, 'modif', 'modif', 'modif', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'modif@modif.modif', 1),
-(3, 'test1', 'test1', 'test1', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test', 1),
-(5, 'fusion', 'fusion', 'fusion', '$2y$10$JZMzZewLUe2yY0d8YCVdWOiTNKPC4m/03DIlcGSW82XBlGANihKLi', 0, 'herve974.30@gmail.com', 0),
-(6, 'aa', 'aa', 'aa', '$2y$10$iAI2ftFQVfE70Ve.NP5QQuccITSk2.STjCEOcllqlcfjfG8aJXHRW', 0, 'herve974.30@gmail.com', 0),
-(7, 'zz', 'zz', 'zz', '$2y$10$fA18MZr/UbnWSJhC9nM7pOSRRAQx92Io.KWNTx3jENos8kWgGApwa', 0, 'herve974.30@gmail.com', 0),
-(8, 'ee', 'ee', 'ee', '$2y$10$9jiXa9/PG08raVL3UNfAtO.35PmURhPw9iIaD9mB.MvDu8Gxx8Kri', 0, 'herve974.30@gmail.com', 0);
+INSERT INTO `adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `mdp`, `status`, `email`, `verif`, `tel`) VALUES
+(2, 'modif', 'modif', 'modif', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'modif@modif.modif', 1, 0),
+(3, 'test1', 'test1', 'test1', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test', 1, 0),
+(5, 'fusion', 'fusion', 'fusion', '$2y$10$JZMzZewLUe2yY0d8YCVdWOiTNKPC4m/03DIlcGSW82XBlGANihKLi', 0, 'herve974.30@gmail.com', 0, 0),
+(6, 'aa', 'aa', 'aa', '$2y$10$iAI2ftFQVfE70Ve.NP5QQuccITSk2.STjCEOcllqlcfjfG8aJXHRW', 0, 'herve974.30@gmail.com', 0, 0),
+(7, 'zz', 'zz', 'zz', '$2y$10$fA18MZr/UbnWSJhC9nM7pOSRRAQx92Io.KWNTx3jENos8kWgGApwa', 0, 'herve974.30@gmail.com', 0, 0),
+(8, 'ee', 'ee', 'ee', '$2y$10$9jiXa9/PG08raVL3UNfAtO.35PmURhPw9iIaD9mB.MvDu8Gxx8Kri', 0, 'herve974.30@gmail.com', 0, 0),
+(11, 'll', 'll', 'll', '$2y$10$Q7yaWCUTrn4nhFL1ce2L8.SANx838I5xIGSXVbTy.P2OzP2yl4p3S', 0, 'l@l.l', 1, 0),
+(12, 'bb', 'bb', 'bb', '$2y$10$OGW5FcAb5fTJ/UUrRTotw.ODC.6GfY6bO.VtSzNYNf.2Y.mynqD.G', 0, 'b@b.b', 0, NULL);
+
+--
+-- Déclencheurs `adherant`
+--
+DELIMITER $$
+CREATE TRIGGER `delete-verif` BEFORE DELETE ON `adherant` FOR EACH ROW BEGIN
+    DELETE FROM verification WHERE adh=OLD.id_adh;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `historique-adh` AFTER INSERT ON `adherant` FOR EACH ROW BEGIN
+	INSERT INTO `alt-adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `email`,`tel`) VALUES
+(NEW.id_adh, NEW.nom, NEW.prenom, NEW.pseudo, NEW.email, NEW.tel);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `alt-adherant`
+--
+
+CREATE TABLE `alt-adherant` (
+  `id_adh` int(11) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `pseudo` varchar(50) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `tel` int(10) DEFAULT NULL,
+  `DateCreation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `alt-adherant`
+--
+
+INSERT INTO `alt-adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `email`, `tel`, `DateCreation`) VALUES
+(11, 'll', 'll', 'll', 'l@l.l', 0, '2019-04-24 06:17:00'),
+(12, 'bb', 'bb', 'bb', 'b@b.b', NULL, '2019-04-24 06:17:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `alt-est_passage`
+--
+
+CREATE TABLE `alt-est_passage` (
+  `id_trajet_est_passage` int(11) NOT NULL,
+  `id_adh_Adherant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `alt-est_passage`
+--
+
+INSERT INTO `alt-est_passage` (`id_trajet_est_passage`, `id_adh_Adherant`) VALUES
+(1, 11),
+(1, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(4, 11),
+(1, 11),
+(1, 11),
+(4, 11),
+(4, 11);
+
+--
+-- Déclencheurs `alt-est_passage`
+--
+DELIMITER $$
+CREATE TRIGGER `historique-rejoindre-trajet` BEFORE INSERT ON `alt-est_passage` FOR EACH ROW INSERT INTO `historique_trajet` (`adh`, `trajet`, `action`) VALUES
+(NEW.id_adh_Adherant , NEW.id_trajet_est_passage , "Rejoindre")
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `alt-propose`
+--
+
+CREATE TABLE `alt-propose` (
+  `id_trajet_Propose` int(11) NOT NULL,
+  `id_adh_Adherant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `alt-propose`
+--
+
+INSERT INTO `alt-propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
+(1, 11),
+(2, 11),
+(3, 11),
+(4, 11);
+
+--
+-- Déclencheurs `alt-propose`
+--
+DELIMITER $$
+CREATE TRIGGER `historique-ajout-trajet` AFTER INSERT ON `alt-propose` FOR EACH ROW INSERT INTO `historique_trajet` (`adh`, `trajet`, `action`) VALUES
+(NEW.id_adh_Adherant , NEW.id_trajet_Propose, "Création")
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `alt-trajet`
+--
+
+CREATE TABLE `alt-trajet` (
+  `id_trajet` int(11) NOT NULL,
+  `debut` int(11) NOT NULL,
+  `fin` int(11) NOT NULL,
+  `nb_places` int(11) NOT NULL,
+  `dateTrajet` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `alt-trajet`
+--
+
+INSERT INTO `alt-trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
+(1, 4, 1, 2, '2019-04-25 05:17:32'),
+(2, 9, 1, 2, '2019-04-25 05:17:37'),
+(3, 1, 13, 3, '2019-04-25 05:17:40'),
+(4, 2, 1, 5, '2019-04-25 05:25:31');
 
 -- --------------------------------------------------------
 
@@ -72,6 +210,53 @@ CREATE TABLE `est_passage` (
   `id_trajet_est_passage` int(11) NOT NULL,
   `id_adh_Adherant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déclencheurs `est_passage`
+--
+DELIMITER $$
+CREATE TRIGGER `historique-est_passage` AFTER INSERT ON `est_passage` FOR EACH ROW INSERT INTO `alt-est_passage` (`id_trajet_est_passage`, `id_adh_Adherant`) VALUES
+(NEW.id_trajet_est_passage, NEW.id_adh_Adherant)
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `historique_trajet`
+--
+
+CREATE TABLE `historique_trajet` (
+  `adh` int(11) NOT NULL,
+  `trajet` int(11) NOT NULL,
+  `action` varchar(20) NOT NULL,
+  `dateAction` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `historique_trajet`
+--
+
+INSERT INTO `historique_trajet` (`adh`, `trajet`, `action`, `dateAction`) VALUES
+(11, 3, 'Suppression', '2019-04-25 05:25:08'),
+(11, 1, 'Rejoindre', '2019-04-25 05:25:24'),
+(11, 4, 'Création', '2019-04-25 05:25:35'),
+(11, 1, 'Rejoindre', '2019-04-25 05:28:49'),
+(11, 4, 'Rejoindre', '2019-04-25 05:29:09'),
+(11, 4, 'Rejoindre', '2019-04-25 05:29:12'),
+(11, 4, 'Rejoindre', '2019-04-25 05:29:25'),
+(11, 4, 'Rejoindre', '2019-04-25 05:29:42'),
+(11, 4, 'Rejoindre', '2019-04-25 05:30:06'),
+(11, 4, 'Rejoindre', '2019-04-25 05:30:21'),
+(11, 4, 'Rejoindre', '2019-04-25 05:31:10'),
+(11, 4, 'Rejoindre', '2019-04-25 05:31:14'),
+(11, 1, 'Rejoindre', '2019-04-25 05:31:22'),
+(11, 1, 'Rejoindre', '2019-04-25 05:32:05'),
+(11, 1, 'Quitte', '2019-04-25 05:32:05'),
+(11, 4, 'Rejoindre', '2019-04-25 05:32:13'),
+(11, 4, 'Quitte', '2019-04-25 05:32:14'),
+(11, 4, 'Rejoindre', '2019-04-25 05:33:36'),
+(11, 4, 'Quitte', '2019-04-25 05:33:36');
 
 -- --------------------------------------------------------
 
@@ -101,7 +286,19 @@ CREATE TABLE `propose` (
 
 INSERT INTO `propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
 (35, 3),
-(39, 3);
+(39, 3),
+(1, 11),
+(4, 11),
+(40, 3);
+
+--
+-- Déclencheurs `propose`
+--
+DELIMITER $$
+CREATE TRIGGER `historique-propose` AFTER INSERT ON `propose` FOR EACH ROW INSERT INTO `alt-propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
+(NEW.id_trajet_Propose, NEW.id_adh_Adherant)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -127,7 +324,10 @@ INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VA
 (10, 4, 1, 4, '2019-04-15 07:44:16'),
 (12, 19, 1, 3, '2019-04-15 18:03:55'),
 (35, 5, 1, 8, '2019-04-17 11:56:57'),
-(39, 5, 1, 9, '2019-04-17 11:58:52');
+(39, 5, 1, 9, '2019-04-17 11:58:52'),
+(1, 4, 1, 2, '2019-04-25 05:17:32'),
+(4, 2, 1, 5, '2019-04-25 05:25:31'),
+(40, 6, 1, 1, '2019-04-24 10:45:30');
 
 --
 -- Déclencheurs `trajet`
@@ -135,6 +335,14 @@ INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VA
 DELIMITER $$
 CREATE TRIGGER `delTraj` BEFORE DELETE ON `trajet` FOR EACH ROW BEGIN
     DELETE FROM propose WHERE id_trajet_Propose=OLD.id_trajet;
+    DELETE FROM est_passage WHERE id_trajet_est_passage=OLD.id_trajet;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `historique_trajet` AFTER INSERT ON `trajet` FOR EACH ROW BEGIN
+	INSERT INTO `alt-trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
+(NEW.id_trajet, NEW.debut, NEW.fin, NEW.nb_places, NEW.dateTrajet);
 END
 $$
 DELIMITER ;
@@ -159,7 +367,9 @@ INSERT INTO `verification` (`adh`, `code`, `dateVerif`) VALUES
 (5, '5cb18fd0d8d97', '2019-04-13 07:29:20'),
 (6, '5cb1913fdec85', '2019-04-13 07:35:27'),
 (7, '5cb1a4aadab19', '2019-04-13 08:58:18'),
-(8, '5cb1a6c7b7dfd', '2019-04-13 09:07:19');
+(8, '5cb1a6c7b7dfd', '2019-04-13 09:07:19'),
+(11, '5cbfe93a0e7ba', '2019-04-24 04:42:34'),
+(12, '5cbfea3af286b', '2019-04-24 04:46:50');
 
 -- --------------------------------------------------------
 
@@ -219,6 +429,34 @@ ALTER TABLE `adherant`
   ADD PRIMARY KEY (`id_adh`);
 
 --
+-- Index pour la table `alt-adherant`
+--
+ALTER TABLE `alt-adherant`
+  ADD PRIMARY KEY (`id_adh`);
+
+--
+-- Index pour la table `alt-est_passage`
+--
+ALTER TABLE `alt-est_passage`
+  ADD KEY `alt-est_passage_Adherant0_FK` (`id_adh_Adherant`),
+  ADD KEY `alt-est_passage_Trajet_FK` (`id_trajet_est_passage`);
+
+--
+-- Index pour la table `alt-propose`
+--
+ALTER TABLE `alt-propose`
+  ADD KEY `alt-Propose_Adherant0_FK` (`id_adh_Adherant`),
+  ADD KEY `adh_propose_FK` (`id_trajet_Propose`);
+
+--
+-- Index pour la table `alt-trajet`
+--
+ALTER TABLE `alt-trajet`
+  ADD PRIMARY KEY (`id_trajet`),
+  ADD KEY `alt-deb_vil_FK` (`debut`),
+  ADD KEY `alt-fin_vil_FK` (`fin`);
+
+--
 -- Index pour la table `eleve`
 --
 ALTER TABLE `eleve`
@@ -230,6 +468,13 @@ ALTER TABLE `eleve`
 ALTER TABLE `est_passage`
   ADD KEY `est_passage_Trajet_FK` (`id_trajet_est_passage`),
   ADD KEY `est_passage_Adherant0_FK` (`id_adh_Adherant`);
+
+--
+-- Index pour la table `historique_trajet`
+--
+ALTER TABLE `historique_trajet`
+  ADD KEY `hist_adh_FK` (`adh`),
+  ADD KEY `hist_trajet_FK` (`trajet`);
 
 --
 -- Index pour la table `personnel`
@@ -278,11 +523,32 @@ ALTER TABLE `adherant`
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `alt-est_passage`
+--
+ALTER TABLE `alt-est_passage`
+  ADD CONSTRAINT `alt-est_passage_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `alt-adherant` (`id_adh`),
+  ADD CONSTRAINT `alt-est_passage_Trajet_FK` FOREIGN KEY (`id_trajet_est_passage`) REFERENCES `alt-trajet` (`id_trajet`);
+
+--
+-- Contraintes pour la table `alt-propose`
+--
+ALTER TABLE `alt-propose`
+  ADD CONSTRAINT `adh_propose_FK` FOREIGN KEY (`id_trajet_Propose`) REFERENCES `alt-trajet` (`id_trajet`),
+  ADD CONSTRAINT `alt-Propose_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `alt-adherant` (`id_adh`);
+
+--
+-- Contraintes pour la table `alt-trajet`
+--
+ALTER TABLE `alt-trajet`
+  ADD CONSTRAINT `alt-deb_vil_FK` FOREIGN KEY (`debut`) REFERENCES `ville` (`id_ville`),
+  ADD CONSTRAINT `alt-fin_vil_FK` FOREIGN KEY (`fin`) REFERENCES `ville` (`id_ville`);
 
 --
 -- Contraintes pour la table `eleve`
@@ -296,6 +562,13 @@ ALTER TABLE `eleve`
 ALTER TABLE `est_passage`
   ADD CONSTRAINT `est_passage_Adherant0_FK` FOREIGN KEY (`id_adh_Adherant`) REFERENCES `adherant` (`id_adh`),
   ADD CONSTRAINT `est_passage_Trajet_FK` FOREIGN KEY (`id_trajet_est_passage`) REFERENCES `trajet` (`id_trajet`);
+
+--
+-- Contraintes pour la table `historique_trajet`
+--
+ALTER TABLE `historique_trajet`
+  ADD CONSTRAINT `hist_adh_FK` FOREIGN KEY (`adh`) REFERENCES `alt-adherant` (`id_adh`),
+  ADD CONSTRAINT `hist_trajet_FK` FOREIGN KEY (`trajet`) REFERENCES `alt-trajet` (`id_trajet`);
 
 --
 -- Contraintes pour la table `personnel`

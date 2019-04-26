@@ -93,5 +93,21 @@ class trajet extends ConnexionDB  {
 		$sql->execute( array($idTrajet) );
 		return $sql->fetch();
 	}
+	//Retourne la liste des mails des adherants inscri à un trajet.
+	public function getEmailPassage($id) 
+	{
+		$sql = $this->cnx->prepare("SELECT email FROM adherant, est_passage WHERE id_adh_Adherant = id_adh AND 	id_trajet_est_passage =?;");
+		$sql->execute( array($id) );
+		return $sql->fetchAll();
+
+	}
+	//Ajoute une ligne à l'historique.
+	public function histoTrajet($trajet,$adh,$action)
+	{
+		$sql = $this->cnx->prepare("INSERT INTO historique_trajet (`adh`,`trajet`,`action`) 
+        VALUES (?,?,?)");
+		$sql->execute( array($adh,$trajet,$action));
+		return $sql->rowCount();
+	}
 
 }

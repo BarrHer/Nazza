@@ -55,15 +55,23 @@ class AccueilController
 		$passageId = $this->trajets->getPassageId($_SESSION['id']);
 		}
 		session_write_close();
+
+		if (!empty($_GET['idTrajet'])){
+			$infoTrajet = $this->trajets->getTrajet($_GET['idTrajet']);
+			$proposePar = $this->trajets->getPseudoPropose($_GET['idTrajet']);
+			$villeDepart = $this->villes->getVille($infoTrajet['debut']);
+			$villeArrive = $this->villes->getVille($infoTrajet['fin']);
+			$PlacesRestantes = $this->trajets->getNbPlacesRestantes($_GET['idTrajet']);
+		}
 		
 		foreach ($traj2 as $key => $value) {
-			 
+			
 			$traj[$key]['debut']=$this->villes->getVille($traj2[$key]['debut']);
 			$traj[$key]['fin']=$this->villes->getVille($traj2[$key]['fin']);
 			$traj[$key]['dateTrajet']=$traj2[$key]['dateTrajet'];
 			$traj[$key]['nb_places']=$traj2[$key]['nb_places'];
 			$traj[$key]['id_trajet']=$traj2[$key]['id_trajet'];
-			 
+			$traj[$key]['PlacesRestantes']=$this->trajets->getNbPlacesRestantes($traj2[$key]['id_trajet']);
 			}
 		include "RechercheViewer.php";
   	}
