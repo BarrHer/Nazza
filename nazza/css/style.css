@@ -1,0 +1,20 @@
+.bg-naz{
+    background-color: #081966
+}
+.bg-naz-footer{
+    background-color: #010A32
+}
+.text-red{
+    color: #ED0404
+}
+.text-naz{
+    color: #010A32
+}
+.nav > li{
+    padding-left:30px;
+  }
+
+#indextr:hover{
+    background-color: #f2f2f2;
+    cursor: pointer;
+  }
