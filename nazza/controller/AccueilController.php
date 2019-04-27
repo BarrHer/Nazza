@@ -28,7 +28,7 @@ class AccueilController
 
 		if (!empty($_GET['idTrajet'])){
 			$infoTrajet = $this->trajets->getTrajet($_GET['idTrajet']);
-			$proposePar = $this->trajets->getPseudoPropose($_GET['idTrajet']);
+			$proposePar = $this->trajets->getInfoAdhPropose($_GET['idTrajet']);
 			$villeDepart = $this->villes->getVille($infoTrajet['debut']);
 			$villeArrive = $this->villes->getVille($infoTrajet['fin']);
 			$PlacesRestantes = $this->trajets->getNbPlacesRestantes($_GET['idTrajet']);
@@ -58,7 +58,7 @@ class AccueilController
 
 		if (!empty($_GET['idTrajet'])){
 			$infoTrajet = $this->trajets->getTrajet($_GET['idTrajet']);
-			$proposePar = $this->trajets->getPseudoPropose($_GET['idTrajet']);
+			$proposePar = $this->trajets->getInfoAdhPropose($_GET['idTrajet']);
 			$villeDepart = $this->villes->getVille($infoTrajet['debut']);
 			$villeArrive = $this->villes->getVille($infoTrajet['fin']);
 			$PlacesRestantes = $this->trajets->getNbPlacesRestantes($_GET['idTrajet']);

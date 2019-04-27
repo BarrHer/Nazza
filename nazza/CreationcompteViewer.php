@@ -21,29 +21,35 @@ function subm() {
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="prenom">Prenom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom">
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="pseudo">Pseudo</label>
+                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="numtel">Numéro de Téléphone</label>
+                <input type="text" class="form-control" id="numtel" name="numtel" placeholder="0692 12 34 56" pattern=".{10,10}" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="pseudo">Pseudo</label>
-            <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
-        </div>
-        <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="mdp">Mot de passe</label>
-                <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Mot de passe">
+                <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Mot de passe" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="cmdp">Confirmation mot de passe</label>
-                <input type="password" class="form-control" id="cmdp" name="cmdp" placeholder="Mot de passe">
+                <input type="password" class="form-control" id="cmdp" name="cmdp" placeholder="Mot de passe" required>
             </div>
             </div>
             <input type="hidden" name="token" value="" id="captcha">

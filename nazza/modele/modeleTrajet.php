@@ -55,8 +55,8 @@ class trajet extends ConnexionDB  {
 		return $sql->fetchAll();
 	}
 
-	public function getPseudoPropose($idTrajet) {
-		$sql = $this->cnx->prepare("SELECT pseudo FROM adherant WHERE id_adh = (SELECT id_adh_Adherant FROM propose WHERE id_trajet_Propose=?)");
+	public function getInfoAdhPropose($idTrajet) {
+		$sql = $this->cnx->prepare("SELECT * FROM adherant WHERE id_adh = (SELECT id_adh_Adherant FROM propose WHERE id_trajet_Propose=?)");
 		$sql->execute( array($idTrajet) );
 		return $sql->fetch();
 	}

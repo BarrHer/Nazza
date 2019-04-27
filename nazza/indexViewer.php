@@ -25,7 +25,7 @@
                                 <tbody>
                                 <?php  if (!empty($traj)) {
                                 foreach ($traj as $key => $value) {
-                                    list($date, $heure) = explode(" ", $traj[$key]['dateTrajet']);
+                                    list($date, $heure) = explode(" ", $value['dateTrajet']);
                                     list($yyyy, $mm, $dd) = explode("-", $date);?>
                                 <tr id='indextr'> 
                                 
@@ -102,7 +102,11 @@
                     <td>Proposé par :</td>
                     <td><?php echo $proposePar['pseudo'];?></td>
                 </tr>
-                
+                <tr>
+                    <td>Contact :</td>
+                    <td><?php echo $proposePar['tel'];?><br>
+                    <?php echo $proposePar['email'];?></td>
+                </tr>
                 <tr>
                     <td>Départ :</td>
                     <td><?php echo $villeDepart['nom_ville'];?></td>
