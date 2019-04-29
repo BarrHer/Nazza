@@ -25,7 +25,7 @@
     
     <td><?php $verif = 0; 
     if (isset($proposeId)) {foreach ($proposeId as $k => $v) {
-    if ($v["id_trajet_Propose"] == $value['id_trajet']) { $verif = 1; ?><button type='button' onClick="window.location = '?ctrl=trajet&mth=delTraj&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger'>X</button><?php } } } ?></td>
+    if ($v["id_trajet_Propose"] == $value['id_trajet']) { $verif = 1; ?><button type='button' onClick="window.location = '?ctrl=trajet&mth=delTraj&id=<?php echo $value['id_trajet']?>&page=1'" class='btn btn-outline-danger'>X</button><?php } } } ?></td>
         <td class='clickable-row' data-id="<?php echo $value['id_trajet'] ?>"><?php echo $value['debut']['nom_ville'] ?></td>
         <td class='clickable-row' data-id="<?php echo $value['id_trajet'] ?>"><?php echo $value['fin']['nom_ville'] ?></td>
         <td class='clickable-row' data-id="<?php echo $value['id_trajet'] ?>"><?php echo $dd."/".$mm."/".$yyyy ?></td>
@@ -39,17 +39,17 @@
                 }
             }
     if ($test == 1){ ?>
-        <button type='button' onClick="window.location = '?ctrl=trajet&mth=delTrajPassage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-info'>Annuler</button>
+        <button type='button' onClick="window.location = '?ctrl=trajet&mth=delTrajPassage&id=<?php echo $value['id_trajet']?>&page=1'" class='btn btn-outline-info'>Annuler</button>
     <?php } else if ($value['PlacesRestantes']['PlacesRestantes'] <= 0){ ?>
         <button type='button' class='btn btn-outline-secondary' disabled>Plein</button>
     <?php } else{ ?>
-        <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger' <?php if ($verif == 1) {  echo 'disabled'; }?>>Rejoindre</button>
+        <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>&page=1'" class='btn btn-outline-danger' <?php if ($verif == 1) {  echo 'disabled'; }?>>Rejoindre</button>
     <?php }
     } else if (!empty($_SESSION)) {
         if ($value['PlacesRestantes']['PlacesRestantes'] <= 0){ ?>
             <button type='button' class='btn btn-outline-secondary' disabled>Plein</button>
         <?php } else {  ?>
-        <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>'" class='btn btn-outline-danger' <?php if ($verif == 1) {  echo 'disabled'; }?> >Rejoindre</button>
+        <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $value['id_trajet']?>&page=1'" class='btn btn-outline-danger' <?php if ($verif == 1) {  echo 'disabled'; }?> >Rejoindre</button>
         
     <?php } } } } else {
         echo 'Pas de trajet disponible.';
@@ -124,7 +124,7 @@
                         }
                     }
                 if ($test == 1){ ?>
-                    <button type='button' onClick="window.location = '?ctrl=trajet&mth=delTrajPassage&id=<?php echo $_GET['idTrajet']?>'" class='btn btn-outline-info'>Annuler</button>
+                    <button type='button' onClick="window.location = '?ctrl=trajet&mth=delTrajPassage&id=<?php echo $_GET['idTrajet']?>&page=1'" class='btn btn-outline-info'>Annuler</button>
                 <?php }
 
                 else if ($PlacesRestantes['PlacesRestantes'] <= 0){ ?>
@@ -134,7 +134,7 @@
                         foreach ($proposeId as $k => $v) {
                             if ($v['id_trajet_Propose'] == $_GET['idTrajet']) {  $verif2=1; } ?>
             <?php } ?>
-            <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $_GET['idTrajet']?>'" class='btn btn-outline-danger' <?php if ($verif2 == 1) {  echo 'disabled'; }?>>Rejoindre</button>
+            <button type='button' onClick="window.location = '?ctrl=trajet&mth=est_passage&id=<?php echo $_GET['idTrajet']?>&page=1'" class='btn btn-outline-danger' <?php if ($verif2 == 1) {  echo 'disabled'; }?>>Rejoindre</button>
             <?php } } } }?>
             <button type="button" class="btn btn-danger" data-dismiss="modal" onClick="window.location = '?ctrl=Accueil&mth=recherche'">Close</button>
         </div>
