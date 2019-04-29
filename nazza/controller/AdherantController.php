@@ -33,6 +33,12 @@ class AdherantController {
             if (empty($_POST['mdp'])) {
                 $errors['mdp'] = 'Le mdp doit être remplie';
             }
+            if (empty($_POST['numtel'])) {
+                $errors['numtel'] = 'Le numéro de téléphone doit être rempli';
+            }
+            if (strlen(str_replace(' ', '', $_POST['numtel'])) != 10) {
+                $errors['numtel2'] = 'Le numéro de téléphone doit comporter 10 chiffres';
+            }
 
             // Appel de l'API google
             $recaptcha_response = $_POST['token'];

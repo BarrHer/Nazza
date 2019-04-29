@@ -1,5 +1,9 @@
 <?php include ("header.php");?>
 
+<script>
+var tab = Array();
+</script>
+
 <div class="container mt-5 py-4 rounded shadow-lg">
     <h3 class="text-center mb-5">Ajouter un nouveau trajet</h3>
     <form action="?ctrl=trajet&mth=add" method="post">
@@ -8,8 +12,17 @@
             <select id="inputAddress" name="inputAddress" class="form-control" onchange="verif(1);">
             <option value="0">--</option>
             <?php foreach ($villes as $key => $value) {
-                echo '<option value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';
-            } ?>  
+                echo '<option value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';?>
+                <script>
+                
+                tab[<?php echo $value['id_ville']?>] = Array();
+                tab[<?php echo $value['id_ville']?>][1] = <?php echo $value['longitude']?>;
+                tab[<?php echo $value['id_ville']?>][2] = <?php echo $value['latitude']?>;
+                //console.log(tab[25]);
+                </script>
+
+                <?php } ?> 
+
             </select> 
         </div>
         <div class="form-group">
@@ -17,14 +30,14 @@
             <select id="inputAddress2" name="inputAddress2" class="form-control" onchange="verif(2);">
                 <option value="0">--</option>
                 <?php foreach ($villes as $key => $value) {
-                echo '<option value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';
-            } ?>  
+                echo '<option value="'.$value['id_ville'].'" onClick="addMarkerB('.$value['longitude'].','.$value['latitude'].')" >'.$value['nom_ville'].'</option>';
+                } ?>  
             </select> 
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="NbPlace">Nombres de passagers</label>
-                <input id="NbPlace" name="NbPlace" type="text" class="form-control">
+                <input id="NbPlace" name="NbPlace" type="number" class="form-control" min='1' max='7'>
             </div>
             <div class="form-group col-md-4">
                 <label for="trajetHeure">Heure</label>
@@ -40,46 +53,20 @@
     </form>
 </div>
 
-<script>
-var ladate=new Date();
-var date = ladate.toISOString().split('T')[0];
-var heure = ladate.toTimeString().split(' ')[0];
-//document.getElementById('trajetHeure').value = heure;
-//$("#trajetDate").val(date);
-$("#trajetHeure").val(heure);
-$(document).ready(function() {
-    $("#trajetDate").attr({
-       "min" : date,
-       "value" : date
-    });
-});
 
-function verif(input){
-    var ville1 = document.getElementById('inputAddress').value;
-    var ville2 = document.getElementById('inputAddress2').value;
-    if (input == 1){
-        if (ville1 != 1){
-        ville1 = document.getElementById('inputAddress');
-        document.getElementById('inputAddress2').value = 1;
-        }
-        else {
-            document.getElementById('inputAddress2').value = 0;
-        }
-    }
-    else {
-        if (ville2 != 1){
-        ville2 = document.getElementById('inputAddress2');
-        document.getElementById('inputAddress').value = 1;
-        }
-        else {
-            document.getElementById('inputAddress').value = 0;
-        }
-    }
-    
-}
+<!-- function pour select option -->
+<script src="js/verif.js"></script>
 
 
+<!-- Map -->
 
-</script>
+<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/mapTraj.css">
+<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+
+<div id="map" class="map container mt-3 "></div>
+
+<script type="text/javascript"  src="js/map.js" ></script>
+
 
 <?php include ("footer.php"); ?>

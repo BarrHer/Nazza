@@ -80,8 +80,6 @@ class TrajetController {
         if ($del) {
             // Envoie d'un mail d'avertissement à tout les adherents inscrit à ce trajet
             $msg = "Le trajet ". $_GET['id']." a été supprimé.";
-            echo $_GET['id'];
-            var_dump($mails);
             if (!empty($mails)) {
                 $subject = "Alerte suppression trajet";
                 $body = "<html><head></head><body>Alerte, le trajet ".$_GET['id']." a été annulé</body></html>";
@@ -100,23 +98,14 @@ class TrajetController {
         else {
             $msg = "Impossible de supprimer le trajet!";
         }
-        header('Location: ?ctrl=Accueil&mth=index');
-    }
-
-    //fonction test inutile
-    public function test() {
-        $oui = $this->trajets->getEmailPassage(13);
-        foreach ($oui as $k => $v) {
-            echo $oui[$k]['email'];
+        if ($_GET['page'] == 1){
+            header('Location: ?ctrl=Accueil&mth=recherche');
+        } else {
+            header('Location: ?ctrl=Accueil&mth=index');
         }
-        session_start();
-        echo $_SESSION['id'];
-        session_write_close();
+        
     }
 
-
-
-    
     public function est_passage() {
         session_start();
         if (empty($_SESSION)){
@@ -133,24 +122,43 @@ class TrajetController {
         else {
             $msg = "Impossible de rejoindre le trajet!";
         }
-        header('Location: ?ctrl=Accueil&mth=index');
+        if ($_GET['page'] == 1){
+            header('Location: ?ctrl=Accueil&mth=recherche');
+        } else {
+            header('Location: ?ctrl=Accueil&mth=index');
+        }
     }
 
     public function delTrajPassage() {
-        $delPassage = $this->trajets->delTrajPassage($_GET['id']);
+        session_start();
+	    $delPassage = $this->trajets->delTrajPassage($_GET['id'],$_SESSION['id']);
         
 
         if ($delPassage) {
             $msg = "Le trajet ". $_GET['id']." a été annulé.";
             echo $msg;
             //Historisation
-            session_start();
+            
             $this->trajets->histoTrajet($_GET['id'],$_SESSION['id'],"Quitte");
+            if (empty($_SESSION)){
+                $errors['compte'] = 'u nid an acount';
+            }
+            else {
+                $idAdh = $_SESSION['id'];
+            }
             session_write_close();
-        } 
-        else {
-            $msg = "Impossible d'annuler le trajet!";
+            $delPassage = $this->trajets->delTrajPassage($_GET['id'], $idAdh);
+            if ($del) {
+                $msg = "Le trajet ". $_GET['id']." a été annulé.";
+            } 
+            else {
+                $msg = "Impossible d'annuler le trajet!";
+            }
+            if ($_GET['page'] == 1){
+                header('Location: ?ctrl=Accueil&mth=recherche');
+            } else {
+                header('Location: ?ctrl=Accueil&mth=index');
+            }
         }
-        header('Location: ?ctrl=Accueil&mth=index');
     }
 }
