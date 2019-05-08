@@ -1,4 +1,4 @@
-#Travaux effectués <br>
+<h2>Travaux effectués</h2> <br>
 -Création de compte avec mot de passe hashé (fonction d'envoie de mail effectué par Valentin) <br>
 -Connexion + déconnexion sur le site <br>
 -Modification de compte <br>
