@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le :  mer. 24 avr. 2019 à 22:41
--- Version du serveur :  5.7.23
--- Version de PHP :  7.1.21
+-- Hôte : localhost
+-- Généré le :  mer. 08 mai 2019 à 12:57
+-- Version du serveur :  10.1.30-MariaDB
+-- Version de PHP :  7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,7 +37,7 @@ CREATE TABLE `adherant` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `email` varchar(200) NOT NULL,
   `verif` tinyint(1) NOT NULL DEFAULT '0',
-  `tel` int(10) DEFAULT NULL
+  `tel` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -45,14 +45,10 @@ CREATE TABLE `adherant` (
 --
 
 INSERT INTO `adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `mdp`, `status`, `email`, `verif`, `tel`) VALUES
-(2, 'modif', 'modif', 'modif', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'modif@modif.modif', 1, 0),
-(3, 'test1', 'test1', 'test1', '$2y$10$htlxkywhahPI/yG0OiVwVuVj3cjvmJI3Co/J3QaKgxsB9qiiIqZoy', 0, 'test@test.test', 1, 0),
-(5, 'fusion', 'fusion', 'fusion', '$2y$10$JZMzZewLUe2yY0d8YCVdWOiTNKPC4m/03DIlcGSW82XBlGANihKLi', 0, 'herve974.30@gmail.com', 0, 0),
-(6, 'aa', 'aa', 'aa', '$2y$10$iAI2ftFQVfE70Ve.NP5QQuccITSk2.STjCEOcllqlcfjfG8aJXHRW', 0, 'herve974.30@gmail.com', 0, 0),
-(7, 'zz', 'zz', 'zz', '$2y$10$fA18MZr/UbnWSJhC9nM7pOSRRAQx92Io.KWNTx3jENos8kWgGApwa', 0, 'herve974.30@gmail.com', 0, 0),
-(8, 'ee', 'ee', 'ee', '$2y$10$9jiXa9/PG08raVL3UNfAtO.35PmURhPw9iIaD9mB.MvDu8Gxx8Kri', 0, 'herve974.30@gmail.com', 0, 0),
-(11, 'll', 'll', 'll', '$2y$10$Q7yaWCUTrn4nhFL1ce2L8.SANx838I5xIGSXVbTy.P2OzP2yl4p3S', 0, 'l@l.l', 1, 0),
-(12, 'bb', 'bb', 'bb', '$2y$10$OGW5FcAb5fTJ/UUrRTotw.ODC.6GfY6bO.VtSzNYNf.2Y.mynqD.G', 0, 'b@b.b', 0, NULL);
+(1, 'Yuhki', 'Rib', 'rib', '$2y$10$9b5O4jI57al1PUzMwmsJj.tAgGJyCzoNavB4LEfWxdWrDj.gy/1H.', 0, 'clnticaa4@gmail.com', 1, '0692112233'),
+(2, 'test', 'test', 'test', '$2y$10$h2qBkv0sQoj1emXQAv5aceCDIoTf1qDtH3DwI.oGvtHnxqka1Rcgm', 0, 'test@test.t', 0, '1122334455'),
+(3, 'test1', 'test1', 'test1', '$2y$10$GCsShawf5AbgDOtbxUJ/Ve/ApKa7S8P6iAIwnotoynYD9EC7Aqa32', 0, 'test1@t.t', 1, '1122334455'),
+(5, 'test3', 'test3', 'test3', '$2y$10$YmTGzYGpmgDPv4qaqQP4XuWlRXxl7lKNcAhW1Ucb4X5PGGhS9CkEu', 0, 'test3@t.t', 1, '1122334455');
 
 --
 -- Déclencheurs `adherant`
@@ -83,7 +79,7 @@ CREATE TABLE `alt-adherant` (
   `prenom` varchar(50) NOT NULL,
   `pseudo` varchar(50) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `tel` int(10) DEFAULT NULL,
+  `tel` varchar(10) DEFAULT NULL,
   `DateCreation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -92,8 +88,11 @@ CREATE TABLE `alt-adherant` (
 --
 
 INSERT INTO `alt-adherant` (`id_adh`, `nom`, `prenom`, `pseudo`, `email`, `tel`, `DateCreation`) VALUES
-(11, 'll', 'll', 'll', 'l@l.l', 0, '2019-04-24 06:17:00'),
-(12, 'bb', 'bb', 'bb', 'b@b.b', NULL, '2019-04-24 06:17:00');
+(1, 'Yuhki', 'Rib', 'rib', 'clnticaa4@gmail.com', '0692112233', '2019-05-08 09:42:14'),
+(2, 'test', 'test', 'test', 'test@test.t', '1122334455', '2019-05-08 09:48:02'),
+(3, 'test1', 'test1', 'test1', 'test1@t.t', '1122334455', '2019-05-08 09:58:50'),
+(4, 'test2', 'test2', 'test2', 'test2@t.t', '1122334455', '2019-05-08 10:05:35'),
+(5, 'test3', 'test3', 'test3', 'test3@t.t', '1122334455', '2019-05-08 10:17:54');
 
 -- --------------------------------------------------------
 
@@ -111,20 +110,11 @@ CREATE TABLE `alt-est_passage` (
 --
 
 INSERT INTO `alt-est_passage` (`id_trajet_est_passage`, `id_adh_Adherant`) VALUES
-(1, 11),
-(1, 11),
-(4, 11),
-(4, 11),
-(4, 11),
-(4, 11),
-(4, 11),
-(4, 11),
-(4, 11),
-(4, 11),
-(1, 11),
-(1, 11),
-(4, 11),
-(4, 11);
+(2, 3),
+(2, 3),
+(2, 3),
+(5, 5),
+(6, 5);
 
 --
 -- Déclencheurs `alt-est_passage`
@@ -151,10 +141,13 @@ CREATE TABLE `alt-propose` (
 --
 
 INSERT INTO `alt-propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
-(1, 11),
-(2, 11),
-(3, 11),
-(4, 11);
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 5);
 
 --
 -- Déclencheurs `alt-propose`
@@ -184,10 +177,13 @@ CREATE TABLE `alt-trajet` (
 --
 
 INSERT INTO `alt-trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
-(1, 4, 1, 2, '2019-04-25 05:17:32'),
-(2, 9, 1, 2, '2019-04-25 05:17:37'),
-(3, 1, 13, 3, '2019-04-25 05:17:40'),
-(4, 2, 1, 5, '2019-04-25 05:25:31');
+(1, 2, 1, 2, '2019-05-08 09:48:58'),
+(2, 4, 1, 2, '2019-05-08 09:49:03'),
+(3, 2, 1, 5, '2019-05-08 10:24:53'),
+(4, 12, 1, 6, '2019-05-08 10:24:57'),
+(5, 12, 1, 5, '2019-05-08 10:25:01'),
+(6, 12, 1, 2, '2019-05-08 10:25:04'),
+(7, 5, 1, 2, '2019-05-08 10:31:10');
 
 -- --------------------------------------------------------
 
@@ -210,6 +206,13 @@ CREATE TABLE `est_passage` (
   `id_trajet_est_passage` int(11) NOT NULL,
   `id_adh_Adherant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `est_passage`
+--
+
+INSERT INTO `est_passage` (`id_trajet_est_passage`, `id_adh_Adherant`) VALUES
+(5, 5);
 
 --
 -- Déclencheurs `est_passage`
@@ -238,25 +241,23 @@ CREATE TABLE `historique_trajet` (
 --
 
 INSERT INTO `historique_trajet` (`adh`, `trajet`, `action`, `dateAction`) VALUES
-(11, 3, 'Suppression', '2019-04-25 05:25:08'),
-(11, 1, 'Rejoindre', '2019-04-25 05:25:24'),
-(11, 4, 'Création', '2019-04-25 05:25:35'),
-(11, 1, 'Rejoindre', '2019-04-25 05:28:49'),
-(11, 4, 'Rejoindre', '2019-04-25 05:29:09'),
-(11, 4, 'Rejoindre', '2019-04-25 05:29:12'),
-(11, 4, 'Rejoindre', '2019-04-25 05:29:25'),
-(11, 4, 'Rejoindre', '2019-04-25 05:29:42'),
-(11, 4, 'Rejoindre', '2019-04-25 05:30:06'),
-(11, 4, 'Rejoindre', '2019-04-25 05:30:21'),
-(11, 4, 'Rejoindre', '2019-04-25 05:31:10'),
-(11, 4, 'Rejoindre', '2019-04-25 05:31:14'),
-(11, 1, 'Rejoindre', '2019-04-25 05:31:22'),
-(11, 1, 'Rejoindre', '2019-04-25 05:32:05'),
-(11, 1, 'Quitte', '2019-04-25 05:32:05'),
-(11, 4, 'Rejoindre', '2019-04-25 05:32:13'),
-(11, 4, 'Quitte', '2019-04-25 05:32:14'),
-(11, 4, 'Rejoindre', '2019-04-25 05:33:36'),
-(11, 4, 'Quitte', '2019-04-25 05:33:36');
+(1, 1, 'Création', '2019-05-08 09:49:03'),
+(1, 2, 'Création', '2019-05-08 09:49:08'),
+(1, 1, 'Suppression', '2019-05-08 09:49:26'),
+(3, 2, 'Rejoindre', '2019-05-08 10:22:10'),
+(3, 2, 'Quitte', '2019-05-08 10:22:12'),
+(3, 2, 'Rejoindre', '2019-05-08 10:22:15'),
+(3, 2, 'Quitte', '2019-05-08 10:22:18'),
+(3, 2, 'Rejoindre', '2019-05-08 10:22:33'),
+(1, 2, 'Suppression', '2019-05-08 10:23:55'),
+(1, 3, 'Création', '2019-05-08 10:24:57'),
+(1, 4, 'Création', '2019-05-08 10:25:01'),
+(1, 5, 'Création', '2019-05-08 10:25:03'),
+(1, 6, 'Création', '2019-05-08 10:25:07'),
+(5, 5, 'Rejoindre', '2019-05-08 10:31:01'),
+(5, 7, 'Création', '2019-05-08 10:31:14'),
+(5, 6, 'Rejoindre', '2019-05-08 10:55:14'),
+(5, 6, 'Quitte', '2019-05-08 10:55:15');
 
 -- --------------------------------------------------------
 
@@ -285,8 +286,11 @@ CREATE TABLE `propose` (
 --
 
 INSERT INTO `propose` (`id_trajet_Propose`, `id_adh_Adherant`) VALUES
-(1, 11),
-(4, 11);
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 5);
 
 --
 -- Déclencheurs `propose`
@@ -316,8 +320,11 @@ CREATE TABLE `trajet` (
 --
 
 INSERT INTO `trajet` (`id_trajet`, `debut`, `fin`, `nb_places`, `dateTrajet`) VALUES
-(1, 4, 1, 2, '2019-04-25 05:17:32'),
-(4, 2, 1, 5, '2019-04-25 05:25:31');
+(3, 2, 1, 5, '2019-05-08 10:24:53'),
+(4, 12, 1, 6, '2019-05-08 10:24:57'),
+(5, 12, 1, 5, '2019-05-08 10:25:01'),
+(6, 12, 1, 2, '2019-05-08 10:25:04'),
+(7, 5, 1, 2, '2019-05-08 10:31:10');
 
 --
 -- Déclencheurs `trajet`
@@ -354,12 +361,7 @@ CREATE TABLE `verification` (
 --
 
 INSERT INTO `verification` (`adh`, `code`, `dateVerif`) VALUES
-(5, '5cb18fd0d8d97', '2019-04-13 07:29:20'),
-(6, '5cb1913fdec85', '2019-04-13 07:35:27'),
-(7, '5cb1a4aadab19', '2019-04-13 08:58:18'),
-(8, '5cb1a6c7b7dfd', '2019-04-13 09:07:19'),
-(11, '5cbfe93a0e7ba', '2019-04-24 04:42:34'),
-(12, '5cbfea3af286b', '2019-04-24 04:46:50');
+(2, '5cd2a5d2e4706', '2019-05-08 09:48:02');
 
 -- --------------------------------------------------------
 
@@ -379,8 +381,8 @@ CREATE TABLE `ville` (
 --
 
 INSERT INTO `ville` (`id_ville`, `nom_ville`, `longitude`, `latitude`) VALUES
-(1, 'Lycée Pierre Poivre', 0.5, 0.6),
-(2, 'Saint-Pierre', 1, 2),
+(1, 'Lycée Pierre Poivre', 55.624, -21.3737),
+(2, 'Saint-Pierre', 55.4777, -21.342),
 (3, 'Saint-Denis', 121, 1),
 (4, 'Saint-André', 1, 1),
 (5, 'Le Port', 1, 1),
@@ -507,13 +509,13 @@ ALTER TABLE `ville`
 -- AUTO_INCREMENT pour la table `adherant`
 --
 ALTER TABLE `adherant`
-  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_adh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Contraintes pour les tables déchargées
