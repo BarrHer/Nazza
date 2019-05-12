@@ -2,10 +2,10 @@
 
 class ConnexionDB {
 	protected $cnx;
-	private $host       = "localhost";
-	private $username   = "ad_nazza";
+	private $host       = "mysql-benjamin-hoareau.alwaysdata.net";
+	private $username   = "183533";
 	private $password   = "pwnazza";
-	private $dbname     = "nazza";
+	private $dbname     = "benjamin-hoareau_nazza";
 	private $options    = array(
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

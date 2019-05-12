@@ -13,3 +13,8 @@
 .nav > li{
     padding-left:30px;
   }
+
+#indextr:hover{
+    background-color: #f2f2f2;
+    cursor: pointer;
+  }

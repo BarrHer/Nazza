@@ -44,7 +44,7 @@ class trajet extends ConnexionDB  {
 	}
 
 	public function getPassageId($idAdh) {
-		$sql = $this->cnx->prepare("SELECT id_trajet_est_passage FROM est_passage WHERE id_adh_Adherant=?  ");
+		$sql = $this->cnx->prepare("SELECT * FROM est_passage WHERE id_adh_Adherant=?  ");
 		$sql->execute( array($idAdh) );
 		return $sql->fetchAll();
 	}
@@ -53,6 +53,12 @@ class trajet extends ConnexionDB  {
 		$sql = $this->cnx->prepare("SELECT id_trajet_Propose FROM propose WHERE id_adh_Adherant=?  ");
 		$sql->execute( array($idAdh) );
 		return $sql->fetchAll();
+	}
+
+	public function getInfoAdhPropose($idTrajet) {
+		$sql = $this->cnx->prepare("SELECT * FROM adherant WHERE id_adh = (SELECT id_adh_Adherant FROM propose WHERE id_trajet_Propose=?)");
+		$sql->execute( array($idTrajet) );
+		return $sql->fetch();
 	}
 
 	public function delTraj($id)
@@ -69,10 +75,38 @@ class trajet extends ConnexionDB  {
 		return $sql->rowCount();
 	}
 
-	public function delTrajPassage($id)
+	public function delTrajPassage($id, $idAdh)
 	{
-		$sql = $this->cnx->prepare("DELETE FROM est_passage WHERE id_trajet_est_passage = ?");
+		$sql = $this->cnx->prepare("DELETE FROM est_passage WHERE id_trajet_est_passage = ? AND id_adh_Adherant=?");
+		$sql->execute( array($id, $idAdh) );
+		return $sql->rowCount();
+	}
+
+	public function getNbPlacesRestantes($idTrajet) {
+		$sql = $this->cnx->prepare("SELECT (SELECT nb_places FROM trajet WHERE id_trajet = ?) - (SELECT count(*) FROM est_passage WHERE id_trajet_est_passage = ?) AS 'PlacesRestantes'");
+		$sql->execute( array($idTrajet, $idTrajet) );
+		return $sql->fetch();
+	}
+
+	public function verifTrajet($idTrajet) {
+		$sql = $this->cnx->prepare("SELECT pseudo FROM adherant WHERE id_adh = (SELECT id_adh_Adherant FROM propose WHERE id_trajet_Propose=?)");
+		$sql->execute( array($idTrajet) );
+		return $sql->fetch();
+	}
+	//Retourne la liste des mails des adherants inscri à un trajet.
+	public function getEmailPassage($id) 
+	{
+		$sql = $this->cnx->prepare("SELECT email FROM adherant, est_passage WHERE id_adh_Adherant = id_adh AND 	id_trajet_est_passage =?;");
 		$sql->execute( array($id) );
+		return $sql->fetchAll();
+
+	}
+	//Ajoute une ligne à l'historique.
+	public function histoTrajet($trajet,$adh,$action)
+	{
+		$sql = $this->cnx->prepare("INSERT INTO historique_trajet (`adh`,`trajet`,`action`) 
+        VALUES (?,?,?)");
+		$sql->execute( array($adh,$trajet,$action));
 		return $sql->rowCount();
 	}
 

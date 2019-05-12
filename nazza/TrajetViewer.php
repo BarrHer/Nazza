@@ -1,5 +1,9 @@
 <?php include ("header.php");?>
 
+<script>
+var tab = Array();
+</script>
+
 <div class="container mt-5 py-4 rounded shadow-lg">
     <h3 class="text-center mb-5">Ajouter un nouveau trajet</h3>
     <form action="?ctrl=trajet&mth=add" method="post">
@@ -8,8 +12,17 @@
             <select id="inputAddress" name="inputAddress" class="form-control" onchange="verif(1);">
             <option value="0">--</option>
             <?php foreach ($villes as $key => $value) {
-                echo '<option value="'.$value['id_ville'].'" onClick="addMarkerA('.$value['longitude'].','.$value['latitude'].')" >'.$value['nom_ville'].'</option>';
-                } ?> 
+                echo '<option value="'.$value['id_ville'].'">'.$value['nom_ville'].'</option>';?>
+                <script>
+                
+                tab[<?php echo $value['id_ville']?>] = Array();
+                tab[<?php echo $value['id_ville']?>][1] = <?php echo $value['longitude']?>;
+                tab[<?php echo $value['id_ville']?>][2] = <?php echo $value['latitude']?>;
+                //console.log(tab[25]);
+                </script>
+
+                <?php } ?> 
+
             </select> 
         </div>
         <div class="form-group">
@@ -36,9 +49,10 @@
             </div>
         </div>
 
-        <input type="submit" name="submit" value="Créer" class="btn btn-primary">12
+        <input type="submit" name="submit" value="Créer" class="btn btn-primary">
     </form>
 </div>
+
 
 <!-- function pour select option -->
 <script src="js/verif.js"></script>
@@ -53,6 +67,6 @@
 <div id="map" class="map container mt-3 "></div>
 
 <script type="text/javascript"  src="js/map.js" ></script>
-    
+
 
 <?php include ("footer.php"); ?>

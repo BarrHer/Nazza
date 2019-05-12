@@ -12,9 +12,15 @@
                 <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom" value=<?php echo $data['prenom']?>>
             </div>
         </div>
-        <div class="form-group">
-            <label for="pseudo">Pseudo</label>
-            <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo" value=<?php echo $data['pseudo']?>>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="pseudo">Pseudo</label>
+                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo" value=<?php echo $data['pseudo']?>>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="numtel">Numéro de Téléphone</label>
+                <input type="text" class="form-control" id="numtel" name="numtel" placeholder="0692 12 34 56" pattern=".{10,10}" value=<?php echo $data['tel']?>>
+            </div>
         </div>
         <div class="form-group">
             <label for="email">Email</label>

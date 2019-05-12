@@ -18,9 +18,10 @@ class adherant extends ConnexionDB  {
 	public function inscription($empl){
 		$mdp = $empl['mdp'];
 		$mdphash = password_hash($mdp, PASSWORD_DEFAULT);
-		$sql = $this->cnx->prepare("INSERT INTO adherant (nom,prenom,pseudo,mdp,email)
-			VALUES (?,?,?,?,?)");
-		$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$mdphash,$empl['email']));
+		$numtel = str_replace(' ', '', $empl['numtel']);
+		$sql = $this->cnx->prepare("INSERT INTO adherant (nom,prenom,pseudo,mdp,email,tel)
+			VALUES (?,?,?,?,?,?)");
+		$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$mdphash,$empl['email'],$numtel));
 		return $sql->rowCount();
 	}
 
@@ -70,14 +71,15 @@ class adherant extends ConnexionDB  {
 	{
 		$mdp = $empl['mdp'];
 		$mdphash = password_hash($mdp, PASSWORD_DEFAULT);
+		$numtel = str_replace(' ', '', $empl['numtel']);
 		// le if permet a l'utilisateur de modifier ses informations sans modifier son mdp
 		if (empty($empl['mdp'])){
-			$sql = $this->cnx->prepare("UPDATE adherant SET nom=?, prenom=?, pseudo=?,email=? WHERE id_adh=?");
-			$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$empl['email'],$id));
+			$sql = $this->cnx->prepare("UPDATE adherant SET nom=?, prenom=?, pseudo=?,email=?, tel=? WHERE id_adh=?");
+			$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$empl['email'],$numtel,$id));
 		}
 		else {
-			$sql = $this->cnx->prepare("UPDATE adherant SET nom=?, prenom=?, pseudo=?,mdp=?,email=? WHERE id_adh=?");
-			$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$mdphash ,$empl['email'],$id));
+			$sql = $this->cnx->prepare("UPDATE adherant SET nom=?, prenom=?, pseudo=?,mdp=?,email=?,tel=? WHERE id_adh=?");
+			$sql->execute( array($empl['nom'],$empl['prenom'],$empl['pseudo'],$mdphash ,$empl['email'],$numtel,$id));
 		}
 		
 		return $sql->rowCount();
