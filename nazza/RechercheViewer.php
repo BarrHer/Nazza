@@ -16,7 +16,7 @@
         <th></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
     <?php  if (!empty($traj)) {
     foreach ($traj as $key => $value) {
         list($date, $heure) = explode(" ", $value['dateTrajet']);
@@ -66,7 +66,7 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Modal 
-          <button type="button" class=" ismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
@@ -151,6 +151,7 @@
     
     <?php } ?>
 
+<!--Script pour ouvrir le modal-->
 <script>
 jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
@@ -161,6 +162,18 @@ jQuery(document).ready(function($) {
         //window.history.pushState({ path: newurl }, '', newurl);
         $("#myModal").modal();
     });
+});
+</script>
+
+<!--script pour la recherche-->
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 });
 </script>
 
