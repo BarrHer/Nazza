@@ -28,7 +28,7 @@ try {
 
     $mail->CharSet = 'UTF-8';
     //Recipients
-    $mail->setFrom("nazza.php@gmail.com", "Le facteur de l'internet du futur");
+    $mail->setFrom("nazza.php@gmail.com", "Covoiturage Nazza");
     $mail->addAddress($destination); //destinataire
     //$mail->addReplyTo('www-data@debianlamp.business.lan', 'owo');
     //$mail->addCC('cc@example.com');

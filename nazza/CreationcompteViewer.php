@@ -1,11 +1,11 @@
 <?php include ("header.php"); ?>
 
-<script src="https://www.google.com/recaptcha/api.js?render=6LddXZ0UAAAAAOIXqmuC2Mb0kGivSXjD8yElgPhf"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Le-JJ8UAAAAAAmn8FlnaJfMYbJOS8D3yfSsyoIy"></script>
 <script>
 
 function subm() {
     grecaptcha.ready(function() {
-        grecaptcha.execute('6LddXZ0UAAAAAOIXqmuC2Mb0kGivSXjD8yElgPhf', {action: 'homepage'})
+        grecaptcha.execute('6Le-JJ8UAAAAAAmn8FlnaJfMYbJOS8D3yfSsyoIy', {action: 'homepage'})
         .then(function(token) {
             // Verify the token on the server.
             console.log(token)

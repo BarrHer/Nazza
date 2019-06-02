@@ -43,7 +43,7 @@
     <header class="bg-naz text-white p-3">
                 <img src="image/logo.png" onClick="window.location = '?ctrl=Accueil&mth=index'" style="width:100px; left:0; position:absolute">
                 <h2 class="text-center">NAZZA CO-VOITURAGE</h2>
-                <p class="text-center">Site</p>
+                <p class="text-center">Site pédagogique</p>
 
     </header>
 </div>

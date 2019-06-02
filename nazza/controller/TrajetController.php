@@ -40,7 +40,7 @@ class TrajetController {
             }
             session_start();
             if (empty($_SESSION)){
-                $errors['compte'] = 'u nid an acount';
+                $errors['compte'] = 'Vous devez être connecté';
             }
             else {
                 $idAdh = $_SESSION['id'];
@@ -109,7 +109,7 @@ class TrajetController {
     public function est_passage() {
         session_start();
         if (empty($_SESSION)){
-            $errors['compte'] = 'u nid an acount';
+            $errors['compte'] = 'Vous devez être connecté';
         }
         else {
             $idAdh = $_SESSION['id'];
@@ -141,7 +141,7 @@ class TrajetController {
             
             $this->trajets->histoTrajet($_GET['id'],$_SESSION['id'],"Quitte");
             if (empty($_SESSION)){
-                $errors['compte'] = 'u nid an acount';
+                $errors['compte'] = 'Vous devez être connecté';
             }
             else {
                 $idAdh = $_SESSION['id'];

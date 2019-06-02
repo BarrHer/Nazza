@@ -74,7 +74,7 @@
                 <div class="card-body">
                     <div class="tab-content mt-2">
                         <div class="tab-pane fade show active text-center" id="tabBackgroundOne" role="tabpanel">
-                            <p>Site de covoiturage blablabla </p>
+                            <p>Site de covoiturage Lycée Pierre poivre - Commencez par ajouter un trajet ! </p>
                             <button type="button" OnClick="window.location='?ctrl=Accueil&mth=trajet'" class="btn btn-outline-danger pt-2">Ajouter un trajet</button>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Modal 
-          <button type="button" class=" ismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->

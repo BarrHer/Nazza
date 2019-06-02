@@ -6,8 +6,8 @@
         <button type="submit" class="btn btn-primary mb-3 btn-block" onClick="window.location = '?ctrl=Adherant&mth=deconnexion'" >Deconnexion</button>
         <br>
         <button type="submit" class="btn btn-primary mb-3 btn-block" onClick="window.location = '?ctrl=Adherant&mth=modification'" >Modification</button>
-        <br>
-        <button type="submit" class="btn btn-primary mb-3 btn-block" onClick="window.location = '?ctrl=Adherant&mth=suppression'" >Suppression</button>
+        <!--<br>
+        <button type="submit" class="btn btn-primary mb-3 btn-block" onClick="window.location = '?ctrl=Adherant&mth=suppression'" >Suppression</button>-->
     <?php } else { ?>
         <button type="submit" class="btn btn-primary mb-3 btn-block" onClick="window.location = '?ctrl=Adherant&mth=connexion'" >Se connecter</button>
         <br>

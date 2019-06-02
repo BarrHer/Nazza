@@ -45,7 +45,7 @@ class AdherantController {
             //var_dump($_POST['token']);
 
             // Récupération du fichier JSON et conversion en Array
-            $recaptcha = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6LddXZ0UAAAAAHyokEA06Bvvjj_UT7sgC21aZAWR&response=' . $recaptcha_response);
+            $recaptcha = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6Le-JJ8UAAAAAPNmSM3j1v0LkzUYJU8ZCvZxfGlI&response=' . $recaptcha_response);
             $recaptcha = json_decode($recaptcha);
 
             // Vérification du score obtenu (modifiable)
@@ -78,8 +78,8 @@ class AdherantController {
     public function mailverif($mail,$id,$code) {
         $destination = $mail;
         $subject = "Vérification E-mail";
-        $body = "<html><head></head><body>http://127.0.0.1:8080/nazza/?ctrl=Adherant&mth=verif&id=$id&code=$code</body></html>";
-        $altbody = "http://127.0.0.1:8080/nazza/?ctrl=Adherant&mth=verif&id=$id&code=$code";
+        $body = "<html><head></head><body>http://barrher.alwaysdata.net/?ctrl=Adherant&mth=verif&id=$id&code=$code</body></html>";
+        $altbody = "http://barrher.alwaysdata.net/?ctrl=Adherant&mth=verif&id=$id&code=$code";
         include __DIR__ . '/sendmail.php';
         echo __DIR__ . '/sendmail.php'.$subject.$destination;
     }
