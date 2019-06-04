@@ -110,4 +110,9 @@ class trajet extends ConnexionDB  {
 		return $sql->rowCount();
 	}
 
+	//Retourne les trajets les plus demandés, du plus demandé au moins demandé.
+	public function getTopTrajet() {
+		return $this->cnx->query("SELECT debut, fin, count(id_trajet) as nbtrajet FROM trajet GROUP BY debut, fin ORDER BY nbtrajet DESC LIMIT 4")->fetchAll();
+	}
+
 }

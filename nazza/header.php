@@ -35,6 +35,9 @@
             <a class="nav-link text-red" href="?ctrl=Accueil&mth=trajet">Trajet</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link text-red" href="?ctrl=Accueil&mth=top">Top Trajets</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link text-red" href="?ctrl=Accueil&mth=compte">Compte</a>
         </li>
     </ul>

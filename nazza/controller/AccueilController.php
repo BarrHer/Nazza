@@ -87,4 +87,17 @@ class AccueilController
 		include "CompteViewer.php";
 	}
 
+	public function top()
+	{
+		$traj2 = $this->trajets->getTopTrajet();	
+		
+		foreach ($traj2 as $key => $value) {
+			
+			$traj[$key]['debut']=$this->villes->getVille($traj2[$key]['debut']);
+			$traj[$key]['fin']=$this->villes->getVille($traj2[$key]['fin']);
+			$traj[$key]['nbTrajet']=$traj2[$key]['nbtrajet'];
+			}
+		include "topViewer.php";
+  	}
+
 }
